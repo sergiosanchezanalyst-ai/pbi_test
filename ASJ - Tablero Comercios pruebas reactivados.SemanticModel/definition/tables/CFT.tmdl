@@ -48,6 +48,9 @@ table CFT
 		formatString: 0
 		lineageTag: b2a06cfa-41de-4581-9e43-c83529e0dddc
 
+	measure test = "esta es una medida de prueba"
+		lineageTag: 207fcb64-0ea9-4911-b72f-a386b9bfef2e
+
 	column CSI
 		dataType: string
 		lineageTag: ae775205-267e-4a46-b65d-b1672e2f0ecf
