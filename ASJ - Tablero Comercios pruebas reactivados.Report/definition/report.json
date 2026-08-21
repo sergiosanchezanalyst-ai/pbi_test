@@ -1,0 +1,159 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY24SU10",
+      "reportVersionAtImport": {
+        "visual": "1.8.95",
+        "report": "2.0.95",
+        "page": "1.3.95"
+      },
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "ASJ4653535994230308.json",
+      "reportVersionAtImport": {
+        "visual": "2.1.0",
+        "report": "2.1.0",
+        "page": "2.0.0"
+      },
+      "type": "RegisteredResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
+              }
+            }
+          },
+          "visible": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "publicCustomVisuals": [
+    "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
+    "flowmap30CFDD5B92F848C88242B1E81C8C33C7",
+    "KPIVizA96234ADB8D143D1837FEC426BB34781",
+    "ZoomChartsPieChartPaidE77E4ED357DC402ABA005987437CF500"
+  ],
+  "resourcePackages": [
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "ASJ4653535994230308.json",
+          "path": "ASJ4653535994230308.json",
+          "type": "Image"
+        },
+        {
+          "name": "borrar_filtro8208290071461963.png",
+          "path": "borrar_filtro8208290071461963.png",
+          "type": "Image"
+        },
+        {
+          "name": "circle-check-big_(1)20034390578660233.png",
+          "path": "circle-check-big_(1)20034390578660233.png",
+          "type": "Image"
+        },
+        {
+          "name": "dollar-square5291803071481921.png",
+          "path": "dollar-square5291803071481921.png",
+          "type": "Image"
+        },
+        {
+          "name": "dollar-square719405505236092.png",
+          "path": "dollar-square719405505236092.png",
+          "type": "Image"
+        },
+        {
+          "name": "PlusPagos_horizontal_-_Azul7560406973923773.png",
+          "path": "PlusPagos_horizontal_-_Azul7560406973923773.png",
+          "type": "Image"
+        },
+        {
+          "name": "PlusPagos_horizontal_-_Blanco9358351834945724.png",
+          "path": "PlusPagos_horizontal_-_Blanco9358351834945724.png",
+          "type": "Image"
+        },
+        {
+          "name": "portada.jpg5715311937488069.jpeg",
+          "path": "portada.jpg5715311937488069.jpeg",
+          "type": "Image"
+        },
+        {
+          "name": "store_(1)43872399998729217.png",
+          "path": "store_(1)43872399998729217.png",
+          "type": "Image"
+        },
+        {
+          "name": "store44512959995556445.svg",
+          "path": "store44512959995556445.svg",
+          "type": "Image"
+        },
+        {
+          "name": "tag-233866987913431024.png",
+          "path": "tag-233866987913431024.png",
+          "type": "Image"
+        },
+        {
+          "name": "tag-25067475110767914.png",
+          "path": "tag-25067475110767914.png",
+          "type": "Image"
+        },
+        {
+          "name": "ticket-slash9073723083807446.png",
+          "path": "ticket-slash9073723083807446.png",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY24SU10",
+          "path": "BaseThemes/CY24SU10.json",
+          "type": "BaseTheme"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultFilterActionIsDataFilter": true,
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true,
+    "customMemoryLimit": "1048576",
+    "customTimeoutLimit": "225"
+  }
+}

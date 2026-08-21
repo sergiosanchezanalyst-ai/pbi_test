@@ -1,0 +1,108 @@
+table Comercios_nuevos_2027
+	lineageTag: 6bcc5e9f-27b0-427e-b0ca-e4ceb37e6b96
+
+	column ComercioEcosistemaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 3280fe2b-f068-4a28-899d-cd7c7cbc5360
+		summarizeBy: none
+		sourceColumn: ComercioEcosistemaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincia = LOOKUPVALUE(DimComercios[Provincia],DimComercios[ComercioEcosistemaID],Comercios_nuevos_2027[ComercioEcosistemaID])
+		lineageTag: 291451dd-dd13-4119-a531-b26925d3866b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column datos_completos_2027 = LOOKUPVALUE(DimComercios[Datos Completos],DimComercios[ComercioEcosistemaID], Comercios_nuevos_2027[ComercioEcosistemaID])
+		lineageTag: 34890e0f-0081-48df-87a8-5632556f8e09
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaAlta
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8338dbb7-f767-4b81-aa16-a9fe7bb0b42c
+		summarizeBy: none
+		sourceColumn: FechaAlta
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Entidad
+		dataType: string
+		lineageTag: 6e1b6968-b9e7-4372-9dc2-e5e92ac159fd
+		summarizeBy: none
+		sourceColumn: Entidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comercio
+		dataType: string
+		lineageTag: 424d7da0-00a5-4f2e-816f-b48fd96618bc
+		summarizeBy: none
+		sourceColumn: Comercio
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeroEnte
+		dataType: string
+		lineageTag: addc95ac-0050-46f6-9aad-1240b88f8ba8
+		summarizeBy: none
+		sourceColumn: NumeroEnte
+
+		annotation SummarizationSetBy = Automatic
+
+	column PersonaID
+		dataType: int64
+		formatString: 0
+		lineageTag: c0c14f9d-fd5e-4876-9ca3-cb6111c6e3b8
+		summarizeBy: count
+		sourceColumn: PersonaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeroDocumento
+		dataType: string
+		lineageTag: 0377c0e6-26bc-4bce-af9e-e851fdbe422f
+		summarizeBy: none
+		sourceColumn: NumeroDocumento
+
+		annotation SummarizationSetBy = Automatic
+
+	column flag_comercio_reactivado = LOOKUPVALUE(DimComerciosReactivados[Flag_Reactivado],'DimComerciosReactivados'[ComercioEcosistemaID], Comercios_nuevos_2027[ComercioEcosistemaID])
+		lineageTag: 0248c5a3-6f3a-40f0-90b1-e4060009d2b7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column flag_comercio_reactivado_2026 = LOOKUPVALUE(DimComerciosReactivados[FlagReactivadoAñoFiscal2026],'DimComerciosReactivados'[ComercioEcosistemaID], Comercios_nuevos_2027[ComercioEcosistemaID])
+		lineageTag: 7aa215c4-4c25-438a-a490-53dcbe2beafa
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column flag_comercio_reactivado_2027 = LOOKUPVALUE(DimComerciosReactivados[FlagReactivadoAñoFiscal2027],'DimComerciosReactivados'[ComercioEcosistemaID], Comercios_nuevos_2027[ComercioEcosistemaID])
+		lineageTag: b12cc9eb-a786-46b5-8d8d-bdc96b75d866
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Comercios_nuevos_2027 = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW", [Query="#(tab)select dce.ComercioEcosistemaID#(lf)#(tab)#(tab)#(tab),dce.FechaAlta#(lf)#(tab)#(tab)#(tab),en.Entidad#(lf)#(tab)#(tab)#(tab),dce.Comercio#(lf)#(tab)#(tab)#(tab),DEN.NumeroEnte#(lf)#(tab)#(tab)#(tab),DEN.PersonaID#(lf)#(tab)#(tab)#(tab),dp.NumeroDocumento#(lf)#(lf)#(lf)FROM Operaciones.DimComercioEcosistemas DCE #(lf)#(tab)INNER JOIN Operaciones.DimEntes DEN ON DEN.EnteID = DCE.EnteID#(lf)#(tab)INNER JOIN Operaciones.DimEntidades EN ON EN.EntidadID = DEN.EntidadID#(lf)#(tab)left join PersonaUnica.DimPersonas dp on dp.PersonaID = den.PersonaID#(lf)#(tab)#(lf)#(tab)WHERE EN.EntidadDeComercio = 1#(lf)#(tab)and dce.FechaAlta >= '2025-07-01'#(lf)#(tab)#(tab)  AND NOT EXISTS (SELECT 1 FROM Operaciones.DimComerciosExclusiones CE #(lf)#(tab)#(tab)#(tab)#(tab)#(tab)#(tab)  WHERE DCE.ComercioEcosistemaID = CE.ComercioEcosistemaID)"])
+				in
+				    Origen
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+

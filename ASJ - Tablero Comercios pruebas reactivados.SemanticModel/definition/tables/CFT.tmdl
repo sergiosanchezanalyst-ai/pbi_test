@@ -1,0 +1,91 @@
+table CFT
+	lineageTag: 8cafaf87-a879-4236-8db5-efa41bf05356
+
+	measure 'Cantidad Sin Transacciones' =
+			
+			CALCULATE(
+			    [Cantidad Comercios nuevos],
+			    FILTER(
+			        VALUES(DimComercios[ComercioID]), // Tu tabla de comercios y su columna ID
+			        ISBLANK([TRX SIN FORMATO] || [TRX SIN FORMATO]= 0 // Tu medida base de transacciones
+			    )
+			))
+		formatString: 0
+		lineageTag: 1417b64a-81e7-43f0-a83f-fe1789c59eda
+
+	measure 'Etiqueta Dinamica Reactivados todos acumulado' = ```
+			
+			VAR Anioseleccionado = SELECTEDVALUE('DimTiempo'[AñoFiscal])
+			VAR ValorMensual = 
+			    SWITCH(
+			        TRUE(),
+			        Anioseleccionado = 2026, [Comercios Reactivados 1],
+			        Anioseleccionado = 2027, [Comercios Reactivados 2027],
+			        ISBLANK(Anioseleccionado), [Comercios Reactivados 1] + [Comercios Reactivados 2027],
+			        BLANK()
+			    )
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ValorMensual > 0, "+" & FORMAT(ValorMensual, "#,##0"),
+			    ValorMensual < 0, FORMAT(ValorMensual, "#,##0"),
+			    "0"
+			)
+			```
+		lineageTag: 7132c474-5f41-4354-ae26-e6ae9c1e1e29
+
+	measure 'Comercios nuevos 2027' = SUM(Comercios_nuevos_2027[trx])
+		formatString: 0
+		lineageTag: be30c90f-4759-46ff-a68c-740702908c2b
+
+	measure 'Comercios sin Trx (Período Seleccionado)' =
+			
+			IF(
+			    SELECTEDVALUE('DimTiempo'[AñoFiscal]) = 2027,
+			    [Comercios nuevos sin transacciones FY 2027],
+			    [Comercios Nuevos sin Trx]
+			)
+		formatString: 0
+		lineageTag: b2a06cfa-41de-4581-9e43-c83529e0dddc
+
+	column CSI
+		dataType: string
+		lineageTag: ae775205-267e-4a46-b65d-b1672e2f0ecf
+		summarizeBy: none
+		sourceColumn: CSI
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		dataType: string
+		lineageTag: f8db7fe1-1000-41e8-ad3b-259ddd72bfd3
+		summarizeBy: none
+		sourceColumn: Mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column ' Volumen ($) CFT '
+		dataType: decimal
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: cdfc03c0-6b32-4ba6-8403-e84965487a2c
+		summarizeBy: sum
+		sourceColumn: " Volumen ($) CFT "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-AR"}
+
+	partition CFT = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("bZK7TgMxEEV/ZbWijEbztl2iQCQaKEIXpSFaoTSEAvH9TLRZL5HduTjyzD1zD4dRhu3+ZdyM29378Ph5idfwMBCQOZj7MB4398x++l4YVgFL2DJvp5+ZUUA0UJOWeb38zowAJwV3bZmn82mZlcyApDPr+WuaGQYjBTNumd30sTDICOw0M97NjqDZoFBqoRq+AHmKxXPL1PBsCNkEvPdTjU+JYlbIlM5fq4CIpu6QsrZUVXA9mooB9gJWCUQZSuxl+XaW0ldOXoCxtMw/5eoZImfLrNOAiKNOt3+Ie86lhASMFizXu8OqdQ9Plh24aAer4kXiPDl6xbmDrcXz2MsNMvawKoIjomOJJqcOVl1IXAc1MO4lXRsYUosqCF4jHP8A", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [CSI = _t, Mes = _t, #" Volumen ($) CFT " = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"CSI", type text}, {"Mes", type text}, {" Volumen ($) CFT ", Currency.Type}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

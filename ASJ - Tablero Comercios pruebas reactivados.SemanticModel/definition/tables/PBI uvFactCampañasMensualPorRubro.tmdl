@@ -1,0 +1,99 @@
+table 'PBI uvFactCampañasMensualPorRubro'
+	lineageTag: d5494353-9f2a-49a9-a996-862a5aa242ac
+
+	column FechaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 43573906-28d3-4463-8746-92ac6d6300d3
+		summarizeBy: count
+		sourceColumn: FechaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CampañaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 4abee045-35ad-4b02-862c-6741320872ef
+		summarizeBy: none
+		sourceColumn: CampañaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RubroComercioID
+		dataType: int64
+		formatString: 0
+		lineageTag: 217680e0-ab3d-4940-93e2-1aa672371332
+		summarizeBy: none
+		sourceColumn: RubroComercioID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormaPagoID
+		dataType: int64
+		formatString: 0
+		lineageTag: 7ae32370-5a73-4d86-b850-f7f73811b992
+		summarizeBy: none
+		sourceColumn: FormaPagoID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EntidadID
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c80c870-c55a-4c8a-ae93-cfa210bc43b4
+		summarizeBy: none
+		sourceColumn: EntidadID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MontoBruto
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 9aa0625d-bdde-4f12-8937-8e41525e46bd
+		summarizeBy: sum
+		sourceColumn: MontoBruto
+
+		annotation SummarizationSetBy = Automatic
+
+	column CantidadTransacciones
+		dataType: int64
+		formatString: 0
+		lineageTag: 176d1be4-aaa8-48c9-aa02-1206d4249ffd
+		summarizeBy: sum
+		sourceColumn: CantidadTransacciones
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaID_Date =
+			
+			DATE(
+			    INT('PBI uvFactCampañasMensualPorRubro'[FechaID] / 10000) ,
+			    INT(MOD('PBI uvFactCampañasMensualPorRubro'[FechaID] / 100 , 100)) ,
+			    MOD('PBI uvFactCampañasMensualPorRubro'[FechaID] , 100)
+			)
+		formatString: dd/mm/yyyy
+		lineageTag: 3b28983d-ecab-497a-b529-686ffca6d6f7
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition 'PBI uvFactCampañasMensualPorRubro' = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW"),
+				    PBI_uvFactCampañasMensualPorRubro = Origen{[Schema="PBI",Item="uvFactCampañasMensualPorRubro"]}[Data]
+				in
+				    PBI_uvFactCampañasMensualPorRubro
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

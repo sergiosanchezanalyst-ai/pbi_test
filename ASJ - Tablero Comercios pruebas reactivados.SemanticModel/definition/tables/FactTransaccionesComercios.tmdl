@@ -1,0 +1,184 @@
+table FactTransaccionesComercios
+	lineageTag: 71b37b55-3971-432f-aad9-63142e7c7f5c
+
+	column FechaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 05548a75-61b9-41b4-ae60-580e99d20706
+		summarizeBy: count
+		sourceColumn: FechaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComercioID
+		dataType: int64
+		formatString: 0
+		lineageTag: b53d1b65-d38b-46c4-98b2-4f97bc298480
+		summarizeBy: none
+		sourceColumn: ComercioID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SucursalID
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a0003e6-554d-44e6-97ee-4c8696e80d1a
+		summarizeBy: count
+		sourceColumn: SucursalID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EstadoTransaccionID
+		dataType: int64
+		formatString: 0
+		lineageTag: 7bfea5f7-c26b-4a94-b117-07674bfa72ff
+		summarizeBy: none
+		sourceColumn: EstadoTransaccionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoTransaccion
+		dataType: string
+		lineageTag: 3ecb5b78-e56c-4046-b8c5-03fdd9f8a7f4
+		summarizeBy: none
+		sourceColumn: TipoTransaccion
+
+		annotation SummarizationSetBy = Automatic
+
+	column Campaña
+		dataType: string
+		lineageTag: 96757f22-6442-4a0b-bb7a-7ff1aaaeeec9
+		summarizeBy: none
+		sourceColumn: Campaña
+
+		annotation SummarizationSetBy = Automatic
+
+	column MedioPago
+		dataType: string
+		lineageTag: 475d0d22-5f2b-4e63-b128-21397a925f3f
+		summarizeBy: none
+		sourceColumn: MedioPago
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormaPago
+		dataType: string
+		lineageTag: f5c09309-56ee-460a-8793-e0ef843f22aa
+		summarizeBy: none
+		sourceColumn: FormaPago
+
+		annotation SummarizationSetBy = Automatic
+
+	column CantidadTxt
+		dataType: int64
+		formatString: 0
+		lineageTag: 535e7b68-3dc2-482c-a48b-5c0b4b33aa7b
+		summarizeBy: sum
+		sourceColumn: CantidadTxt
+
+		annotation SummarizationSetBy = Automatic
+
+	column MontoBruto
+		dataType: double
+		lineageTag: 072bff94-11a5-44cf-8325-ccc5f0070f05
+		summarizeBy: sum
+		sourceColumn: MontoBruto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CantidadClientes
+		dataType: int64
+		formatString: 0
+		lineageTag: ea51fb4b-b4c8-48df-97bd-ae873f7d66dc
+		summarizeBy: sum
+		sourceColumn: CantidadClientes
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaID_Date =
+			
+			DATE(
+			    INT(FactTransaccionesComercios[FechaID] / 10000) ,
+			    INT(MOD(FactTransaccionesComercios[FechaID] / 100 , 100)) ,
+			    MOD(FactTransaccionesComercios[FechaID] , 100)
+			)
+		formatString: dd/mm/yyyy
+		lineageTag: 8756b7eb-eefc-432d-a344-d83d11340272
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Columna_Reactivada = ```
+			
+			LOOKUPVALUE(
+			    DimComerciosReactivados[Flag_Reactivado], 
+			    DimComerciosReactivados[ComercioEcosistemaID],
+			    FactTransaccionesComercios[ComercioID]
+			)
+			```
+		lineageTag: d24b000e-e199-4a98-ad67-ee527601485a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComercioEcosistemaID
+		dataType: int64
+		formatString: 0
+		lineageTag: fe72a3ee-cab4-4116-9d9e-7513282b14f3
+		summarizeBy: none
+		sourceColumn: ComercioEcosistemaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Periodo = FORMAT(FactTransaccionesComercios[FechaID_Date],"yyyy")&"/"&FORMAT(FactTransaccionesComercios[FechaID_Date],"mm")
+		lineageTag: 63a4f81c-c11b-4068-976c-174695a3eef0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fecha_dia = FactTransaccionesComercios[FechaID_Date]
+		formatString: ddd dd
+		lineageTag: f1c881e3-754f-4efa-a805-129443e3e162
+		summarizeBy: none
+
+		variation Variación
+			isDefault
+			relationship: e70f75ca-9301-49fc-89b6-b40e05caa288
+			defaultHierarchy: LocalDateTable_71429347-0a19-4d4c-8a89-6f3130a43b2d.'Jerarquía de fechas'
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column RubroComercio = RELATED(DimComercios[RubroComercio])
+		lineageTag: a3466cc4-d829-4efd-92f4-391e7155b610
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactTransaccionesComercios = m
+		mode: import
+		queryGroup: FACTs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW"),
+				    PBI_uvFactTransaccionesComercios = Origen{[Schema="PBI",Item="uvFactTransaccionesComercios"]}[Data]
+				in
+				    PBI_uvFactTransaccionesComercios
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

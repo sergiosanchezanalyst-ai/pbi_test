@@ -1,0 +1,52 @@
+table TODO
+	lineageTag: 20de5cf1-7b7b-490d-8183-da4f27046b6e
+
+	column Periodo
+		dataType: int64
+		formatString: 0
+		lineageTag: 5037fb23-fb27-4a8e-845d-fb489a765dc9
+		summarizeBy: sum
+		sourceColumn: Periodo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cuotas
+		dataType: int64
+		formatString: 0
+		lineageTag: 85bcd228-d018-4049-a697-6ed3f4c1698b
+		summarizeBy: sum
+		sourceColumn: Cuotas
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cant Tx'
+		dataType: int64
+		formatString: 0
+		lineageTag: b7d72298-b770-4576-8081-057113b80e43
+		summarizeBy: sum
+		sourceColumn: Cant Tx
+
+		annotation SummarizationSetBy = Automatic
+
+	column ' Monto Bruto '
+		dataType: decimal
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: 6b3ef21a-53fb-4a6c-9f4e-ad935388061b
+		summarizeBy: sum
+		sourceColumn: " Monto Bruto "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-AR"}
+
+	partition TODO = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("XZPLjcMwDERbCYw9BgQ/4q+WIP23sZQsOwYPsg964AyH1OdzMLJiHO+DeH7SqH6vvxeBDIcIBZPxOr7vByp1IjYnkIOAJBtkddjtpBwBnUHSH1Reqmy8OQZCgTELOjV0qhL5lh3lLcvjaNSSjU0ZARuCGv8owrtZJt1cOhBFdZINXNwJCYGrtPtlKnG7T3BESMVG2aIuNQLksu9lTp7G6DYmsSv6GCA6SriDp3Bu4QEcDKjaqCVsck+hRjAqtXhku6NYIO/ckgVCGAZ5A0/ZjXF1QlN6NGrJul5N2IDkShijcbl25KS0rNV51DK8E2H6hcdag9KEMG3oNMfMe1xYS2m1Jd6otSEkcg9jydbGPTI+yWlPdzmi2SeIPKFfdGp3dAGj5pFCDTzdyT0xigAnadQZHe7X5akVsdVriMatF0FXdFjW1Kbi9x8=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Periodo = _t, Cuotas = _t, #"Cant Tx" = _t, #" Monto Bruto " = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Periodo", Int64.Type}, {"Cuotas", Int64.Type}, {"Cant Tx", Int64.Type}, {" Monto Bruto ", Currency.Type}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+

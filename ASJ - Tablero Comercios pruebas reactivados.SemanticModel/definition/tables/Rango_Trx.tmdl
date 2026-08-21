@@ -1,0 +1,52 @@
+table Rango_Trx
+	lineageTag: 85620b1c-57d6-4e9d-ba13-0a3ed58cb47e
+
+	column 'Etiqueta (Texto)'
+		dataType: string
+		lineageTag: 4f858bdc-6b53-4851-9100-7b288de0b436
+		summarizeBy: none
+		sourceColumn: Etiqueta (Texto)
+		sortByColumn: Orden
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Min
+		dataType: int64
+		formatString: 0
+		lineageTag: 7360eddf-76b3-4f8f-a5c7-999521191c67
+		summarizeBy: sum
+		sourceColumn: Min
+
+		annotation SummarizationSetBy = Automatic
+
+	column Max
+		dataType: int64
+		formatString: 0
+		lineageTag: 3701cab8-82b2-413b-ac03-df4a44c42f3c
+		summarizeBy: sum
+		sourceColumn: Max
+
+		annotation SummarizationSetBy = Automatic
+
+	column Orden
+		dataType: int64
+		formatString: 0
+		lineageTag: 94dec92d-331d-4f6d-94b9-0908a0858a2b
+		summarizeBy: sum
+		sourceColumn: Orden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Rango_Trx = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45W+jB//iIF38MLixVSUhVMs5V0lEwNDAyBlCUMANmGSrE6YKULFVzzSopSFQz1TLMVKiHqDYEaINpAlBFM6QKoUgsDA6BKkAagrAVYjaEJ2FRjqNIpWxR8U/PywS6AKABhc7AaE6XYWAA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Etiqueta (Texto)" = _t, Min = _t, Max = _t, Orden = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Etiqueta (Texto)", type text}, {"Min", Int64.Type}, {"Max", Int64.Type}, {"Orden", Int64.Type}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,73 @@
+table DimEstadoTransacciones
+	lineageTag: 4ab8ceeb-40e1-40d0-819e-2565f1cec9ce
+
+	column EstadoTransaccionID
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c4b5367-ca2e-4184-bb0d-8c4181a8b2bf
+		summarizeBy: none
+		sourceColumn: EstadoTransaccionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EstadoTransaccion
+		dataType: string
+		lineageTag: fa775eaf-efa0-4e58-a4f9-87515fce45df
+		summarizeBy: none
+		sourceColumn: EstadoTransaccion
+
+		annotation SummarizationSetBy = Automatic
+
+	column EstadoTransaccionGrupo =
+			
+			IF( DimEstadoTransacciones[EstadoTransaccion] = "Realizada" , "Realizada" ,
+			IF( DimEstadoTransacciones[EstadoTransaccion] = "Rechazada" , "Rechazada" ,
+			"Resto"
+			)
+			)
+		lineageTag: 31cc215e-45d6-4be8-995e-59dc26655354
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Eco1SistemaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 58f2dda6-8dc6-4da3-aca4-9767d845ffde
+		summarizeBy: none
+		sourceColumn: Eco1SistemaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Eco2SistemaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ca5e814-ec3d-42b9-87a3-560f83ef2396
+		summarizeBy: none
+		sourceColumn: Eco2SistemaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Eco9SistemaID
+		dataType: int64
+		formatString: 0
+		lineageTag: b881653b-ce3e-4e22-a676-f96eda0d30da
+		summarizeBy: none
+		sourceColumn: Eco9SistemaID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimEstadoTransacciones = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW"),
+				    Operaciones_DimEstadoTransacciones = Origen{[Schema="Operaciones",Item="DimEstadoTransacciones"]}[Data]
+				in
+				    Operaciones_DimEstadoTransacciones
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

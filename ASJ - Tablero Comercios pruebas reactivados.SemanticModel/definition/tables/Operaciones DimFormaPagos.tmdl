@@ -1,0 +1,51 @@
+table 'Operaciones DimFormaPagos'
+	lineageTag: 97dcc5f7-3b7e-42bf-8345-33a21d2e38f0
+
+	column FormaPagoID
+		dataType: int64
+		formatString: 0
+		lineageTag: ee202c0c-951f-481f-adf6-5fd3bf89988d
+		summarizeBy: none
+		sourceColumn: FormaPagoID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormaPagoSistemaID
+		dataType: int64
+		formatString: 0
+		lineageTag: d5c6f99c-6c56-4dc9-81a5-cdbfe98eb024
+		summarizeBy: none
+		sourceColumn: FormaPagoSistemaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FormaPago
+		dataType: string
+		lineageTag: 3ca3de06-84cb-4679-9a4a-318704f97a7c
+		summarizeBy: none
+		sourceColumn: FormaPago
+
+		annotation SummarizationSetBy = Automatic
+
+	column Descripcion
+		dataType: string
+		lineageTag: 93554b66-bcee-4538-8679-78d02ee7aaec
+		summarizeBy: none
+		sourceColumn: Descripcion
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Operaciones DimFormaPagos' = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW"),
+				    Operaciones_DimFormaPagos = Origen{[Schema="Operaciones",Item="DimFormaPagos"]}[Data]
+				in
+				    Operaciones_DimFormaPagos
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

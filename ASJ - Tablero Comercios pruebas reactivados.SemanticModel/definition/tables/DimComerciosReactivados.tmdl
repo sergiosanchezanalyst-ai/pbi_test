@@ -1,0 +1,232 @@
+table DimComerciosReactivados
+	lineageTag: 7215a4d4-da96-49c2-9199-be9f2d35fc8d
+
+	column Flag_Reactivado
+		dataType: string
+		lineageTag: bc75454e-4eff-42e5-80dc-7d9031e9750a
+		summarizeBy: none
+		sourceColumn: Flag_Reactivado
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComercioEcosistemaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 53a219f8-6cb4-42dc-af4d-1bd48e7c3384
+		summarizeBy: none
+		sourceColumn: ComercioEcosistemaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaPrimeraTransaccion_Date_2026 =
+			
+			DATE(
+			    INT(DimComerciosReactivados[FechaPrimeraTransaccionAñoFiscal2026] / 10000) ,
+			    INT(MOD(DimComerciosReactivados[FechaPrimeraTransaccionAñoFiscal2026] / 100 , 100)) ,
+			    MOD(DimComerciosReactivados[FechaPrimeraTransaccionAñoFiscal2026] , 100)
+			)
+		formatString: Long Date
+		lineageTag: 34ba712e-0a57-402b-a465-0fc7dc4c81a4
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column NumeroEnte
+		dataType: string
+		lineageTag: ef7f2e87-7a20-453d-ae00-5b0d693aad99
+		summarizeBy: none
+		sourceColumn: NumeroEnte
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaAlta
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 40848d94-b2fe-4c0c-b06c-ad432d57c9f2
+		summarizeBy: none
+		sourceColumn: FechaAlta
+
+		variation Variación
+			isDefault
+			relationship: 6a60b6c4-3913-4fb3-a33a-48e7baba42d6
+			defaultHierarchy: LocalDateTable_d321f1ce-de60-4011-a31e-6d97bc0c3df6.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column EntidadID
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e2c1754-3df0-4436-a766-a86e4a892795
+		summarizeBy: none
+		sourceColumn: EntidadID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PersonaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 6e291024-eac7-48ba-bfbe-59d6dae4ee25
+		summarizeBy: none
+		sourceColumn: PersonaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComercioRubroComercioID
+		dataType: int64
+		formatString: 0
+		lineageTag: 1431c811-3bfe-4694-9b2a-0b7ee93144a0
+		summarizeBy: none
+		sourceColumn: ComercioRubroComercioID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUIT = RELATED('PersonaUnica DimPersonas'[NumeroDocumento])
+		lineageTag: 526497b0-6c36-4e1d-9145-5b98b42e2611
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Datos Completos FY 2026' =
+			
+			"FECHA PRIMERA TRANSACCIÓN: " &
+			FORMAT(DimComerciosReactivados[FechaPrimeraTransaccion_Date_2026],"YYYY")&
+			"-"&
+			FORMAT(DimComerciosReactivados[FechaPrimeraTransaccion_Date_2026],"MM")&
+			"-"&
+			FORMAT(DimComerciosReactivados[FechaPrimeraTransaccion_Date_2026],"DD")&
+			" / "&
+			"COMERCIO: " &
+			DimComerciosReactivados[Comercio]&
+			" / "&
+			"NÚMERO ENTE: "&
+			DimComerciosReactivados[NumeroEnte]&
+			" / "&
+			"CUIT: "&
+			DimComerciosReactivados[CUIT]&
+			" / "
+			
+			
+			/*
+			&"PROVINCIA: "&
+			DimComerciosReactivados[Provincia]&
+			" / "
+			&"FECHA ALTA: "&
+			DimComerciosReactivados[FechaAlta]
+			*/
+		lineageTag: 48aeae63-c4b3-4128-804b-462a57203102
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Periodo = FORMAT(DimComerciosReactivados[FechaPrimeraTransaccion_Date_2026],"yyyy")&"/"&FORMAT(DimComerciosReactivados[FechaPrimeraTransaccion_Date_2026],"mm")
+		lineageTag: d0cd7c3b-9e51-4888-b7f6-352de97a4ec9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincia = RELATED('Operaciones DimEntidades'[Provincia])
+		lineageTag: ee94efad-39a4-4997-92e6-53abe690d175
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaPrimeraTransaccionAñoFiscal2026
+		dataType: int64
+		formatString: 0
+		lineageTag: 6da591fc-e4cf-4944-93d5-39b24b899381
+		summarizeBy: sum
+		sourceColumn: FechaPrimeraTransaccionAñoFiscal2026
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaPrimeraTransaccionAñoFiscal2027
+		dataType: int64
+		formatString: 0
+		lineageTag: cb23adbb-feba-4296-841a-89226020c7b7
+		summarizeBy: sum
+		sourceColumn: FechaPrimeraTransaccionAñoFiscal2027
+
+		annotation SummarizationSetBy = Automatic
+
+	column FlagReactivadoAñoFiscal2026
+		dataType: string
+		lineageTag: a6e1853b-7a2d-477d-91c9-78175129a00c
+		summarizeBy: none
+		sourceColumn: FlagReactivadoAñoFiscal2026
+
+		annotation SummarizationSetBy = Automatic
+
+	column FlagReactivadoAñoFiscal2027
+		dataType: string
+		lineageTag: 6eea482b-705c-4c1d-8d1b-3ba95a5d60f1
+		summarizeBy: none
+		sourceColumn: FlagReactivadoAñoFiscal2027
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comercio = LOOKUPVALUE('DimComercios (2)'[Comercio], 'DimComercios (2)'[ComercioEcosistemaID], DimComerciosReactivados[ComercioEcosistemaID])
+		lineageTag: 389635dc-215b-4c6e-89b3-a6befa3d855f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaPrimeraTransaccion_Date_2027 =
+			
+			DATE(
+			    INT(DimComerciosReactivados[FechaPrimeraTransaccionAñoFiscal2027] / 10000) ,
+			    INT(MOD(DimComerciosReactivados[FechaPrimeraTransaccionAñoFiscal2027] / 100 , 100)) ,
+			    MOD(DimComerciosReactivados[FechaPrimeraTransaccionAñoFiscal2027] , 100)
+			)
+		formatString: General Date
+		lineageTag: 3d9925bc-9035-4b2b-b6b7-eed504211568
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Datos Completos 2027' =
+			
+			"FECHA PRIMERA TRANSACCIÓN: " &
+			DimComerciosReactivados[FechaPrimeraTransaccionAñoFiscal2027] &
+			" / "&
+			"COMERCIO: " &
+			DimComerciosReactivados[Comercio]&
+			" / "&
+			"NÚMERO ENTE: "&
+			DimComerciosReactivados[NumeroEnte]&
+			" / "&
+			"CUIT: "&
+			DimComerciosReactivados[CUIT]&
+			" / "
+			
+			
+			/*
+			&"PROVINCIA: "&
+			DimComerciosReactivados[Provincia]&
+			" / "
+			&"FECHA ALTA: "&
+			DimComerciosReactivados[FechaAlta]
+			*/
+		lineageTag: 0709d8da-b5e6-4c6d-97b6-a4f63638789d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimComerciosReactivados = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW", [Query="SELECT *#(lf)FROM [PBI].[uvFactComerciosReactivados]"])
+				in
+				    Origen
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

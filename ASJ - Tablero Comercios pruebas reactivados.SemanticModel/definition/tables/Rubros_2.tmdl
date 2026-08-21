@@ -1,0 +1,30 @@
+table Rubros_2
+	lineageTag: e816f66a-e301-4d4b-9430-5a783a151797
+
+	column 'Nueva agrupacion Padre'
+		dataType: string
+		lineageTag: efed26ed-b0df-4196-b086-51442ed90f70
+		summarizeBy: none
+		sourceColumn: Nueva agrupacion Padre
+
+		annotation SummarizationSetBy = Automatic
+
+	column RubroComercio
+		dataType: string
+		lineageTag: 95b0da38-6775-4596-bb94-bab302ac7e9d
+		summarizeBy: none
+		sourceColumn: RubroComercio
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Rubros_2 = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("rVbbbhoxEP0VK8+gquoXwBZoEChRElWKIh6mZkCOdm3qSyTyG/2OPPUT+LHO2LuwXHbTjfISMj7nzNpzs5+eru7DBm2BVsLSuKvekS36YpAXIFGju1r02smO2HPYGquch8v0kdugVJCLU10Gzq06S8C2SyJFfP0WWdd6GQrUHqwCsRUDKdHRXqPiCHusYx9WinugVZHZ8Pquk6nZot29wbvE3Z+NVzLxJuC8NdoULOwdm4xPwzqgj34d+ZmpXzYZ/MESUwQ9lpAqc/YBXf/0sD/MmgK/Fd9RGgtS7f5qUg+s373JkFNwbsGCGOUiElsknEH6Un2xmXyrtA+1k1xmjdHa8nyRlRlNkQuywucQD5ijI6E4QqnqRtpbFHdVabSI4xFnUPNg2AFFSkwD/Xk8DVq3jUws+XhQqJfA8IEcfc1UsVH4CinqKgWdaPt1Jt2iXVGpcST6Y7DU57HisqCW3PsEO6Mh58iWTNVVeLbU9bt5+B3K8usmrVAu1MP2P8nLWcH/v8f9cKpJxB2sVvhpjsTIfvSYUfcztrjmAfRFjI218BxT36sjLk67APsp2ayqGUwc5ShpVNFOHlBqk5t1mmDl+tIU6KhkS7dN7LrFvEHwpjDecMPfmWV5FexXWzjVf82MiUlpP+//y/x9amrCVDBj7C5rGBfv+JgTJJXfVtdfE90DD6Y0Y+7RvigyU+D5pB61KmjIeE7ADUO9U6CdnKnq6dBImahCg6si2kgbumeKx9Dk6QISY0VlwrOPngYmDZaHQG+PItYKTUe3MdYjl0pabqUcjLiJvjQFvygYqxnxtVEGiSa8NSukjes4o7dcG9xZyIE9wjroBo6yVqUkUy+qktMYRwe6vIjrVmo+qo2Yw6HixxqXS/W92LctMOtvqMWYmH4Xi38=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Nueva agrupacion Padre" = _t, RubroComercio = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Nueva agrupacion Padre", type text}, {"RubroComercio", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+

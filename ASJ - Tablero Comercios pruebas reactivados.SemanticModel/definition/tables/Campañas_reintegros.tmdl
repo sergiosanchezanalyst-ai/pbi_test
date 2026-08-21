@@ -1,0 +1,51 @@
+table Campañas_reintegros
+	lineageTag: 7dca921f-1414-4141-86bb-b3d72febc4d0
+
+	measure '% Monto por campaña' = ```
+			
+			var actual = [MONTO BRUTO SIN FORMATO]
+			var total = CALCULATE([MONTO BRUTO SIN FORMATO],'DimCampañas'[Campaña_Grupo] IN 
+			{ "Campañas con Cuotas", "Campañas con Reintegro","Sin Campañas" })
+			RETURN
+			
+			actual/total
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: e1ac8b47-d656-4648-b927-55ed2f551e5b
+
+	column PromocionId
+		dataType: int64
+		formatString: 0
+		lineageTag: d7df0eab-bae6-4b57-85d0-f77c1b390395
+		summarizeBy: count
+		sourceColumn: PromocionId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Descripcion
+		dataType: string
+		lineageTag: 03ebf385-cc76-45c3-ae4b-72f8b1f4352d
+		summarizeBy: none
+		sourceColumn: Descripcion
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nombre
+		dataType: string
+		lineageTag: 1766ada8-32e7-46c8-86d8-ee5f5c1fb96c
+		summarizeBy: none
+		sourceColumn: Nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Campañas_reintegros = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("tVbLbuM2FP2ViwCzy0OUrFd3ih8DFU7jSp4CxSALxmIzLCRRJaXpNH/TZRezKNAvqH+sl5TiRzNxqCm6ECxY555z3+T792ckdIKz87MprRq6/ZPCWjQMiOM4cAHXvCxZyySFfGGFuTs3hNEzsGtB+CWMIYxi7xCcdw2TFZMbWggF0yRPMjRbT60wA+HEAjyzwhjC2I1OgvMFgnNaFgJWqxHIgTx+3eSV8J8wPWHgHIIvIIw9L9C5nzG16VjdCqCwofJBQMFK2AhNxQX4bxDTCs1Z4lOxguNPwaChD+L/oNTuuo7nPuMOvADw7QdWF7ziFHvnDRo9KV3ADd3I5x7ZWfWioW6RlRSVgPmnTdkp/pHCkhZMQpqmJ78ZAuKGXwDNWCMUR7ElhbnCItH6EcuVjIH29IFuiqRrhWLyI9epzFnTclbdS2YCyxivW/YgBUyHZI836KXC082Nk0A8rGhtWH572g436dJqLNF215qopcP60LaN+ubqihYVr7lqJcIlVbT+uaP1JW1LqhTHt5q1V/dS/KrY1dvZ7IK4ZJxY5PyHwGb4jxlUO809fND20U7XdcNpCSsmf+rQbvuZQpYsFnNcfuCdQ4BWMT5yVxt7q17IneiMYg8x9UvHawr0sSshJsEkDNGvXdHtQD2l7/ToKa3NoibEjWP/31wvfh1IdLGWHLvP+L9k4u+/FOAmnYTkmOpVzECoT4kVvS8F3ErF9dysdFFK7UTsEp/ER7zW0IFeL4Tr7N0ieYdT+F26TrL0Nof8MrnUIUZ+eMRui+zJA73i9gO4Dzkp75ksuK6FH0V2oIHSO0JPP3Qlh5VogAS4UcPTHweKyQuCOa3hW6G2f2A8Hp4ntjBNG2n0wSGPXYK9IrtHbLTdHGWs1Ouu4nozj8abU46QsXZg9vpoE6NmpuzEYF7Ps/1k7nNFcLHsLj/O11D08maYdrYLzlRL1WEAe0n3RckxZr2qe2j+Vgzu3tyub6fp+keY1y2eLdn2M+5C71w7TlyY5ulXWvWauiftArOPQ+/iFRZUCWA1pNX29wdWM5SfBAHeYo62hg2sZw2PllfOygYPrvbAFy+OyIRYonrO+GjUvtc3F14L7YHvR3D6o2Ewdz+TdLwAzZc3uqniyMMFPfRWn2y43ohLmGfjwHd3/wA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [PromocionId = _t, Descripcion = _t, Nombre = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"PromocionId", Int64.Type}, {"Descripcion", type text}, {"Nombre", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+

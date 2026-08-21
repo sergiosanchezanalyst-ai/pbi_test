@@ -1,0 +1,232 @@
+table 'DimTiempo (5)'
+	lineageTag: 27b8370f-a3bf-421f-91cc-840aad15aa8f
+
+	column FechaID
+		dataType: int64
+		formatString: 0
+		lineageTag: ecaa78d1-4397-424a-ab65-64192e835bfb
+		summarizeBy: count
+		sourceColumn: FechaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 41716f32-da52-4988-9392-a6b28c164164
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		variation Variación
+			isDefault
+			relationship: 060a690c-be97-4bc6-bb29-a7fb57624017
+			defaultHierarchy: LocalDateTable_04b4cec4-8a46-41b3-96cd-9c8a1fdd13a7.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Año
+		dataType: int64
+		formatString: 0
+		lineageTag: cda97662-e9e9-4794-96b8-3575b1b97553
+		summarizeBy: sum
+		sourceColumn: Año
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		dataType: string
+		lineageTag: f5ffb409-d13b-4cfb-9686-618291823ee2
+		summarizeBy: none
+		sourceColumn: Mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesNumero
+		dataType: int64
+		formatString: 0
+		lineageTag: c6d32733-5452-4a76-9eca-0ab3e5d6ea5d
+		summarizeBy: sum
+		sourceColumn: MesNumero
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 8fb3f194-dda2-46a4-9241-e9f6f506285c
+		summarizeBy: sum
+		sourceColumn: Dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 05a1ae53-a295-47f8-a714-3aafb318c590
+		summarizeBy: sum
+		sourceColumn: Trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cuatrimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: b2f15cc3-42f1-4a22-80d8-4fa984ba4bd4
+		summarizeBy: sum
+		sourceColumn: Cuatrimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 99460714-5806-402b-a160-7308f5894652
+		summarizeBy: sum
+		sourceColumn: Semestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semana
+		dataType: int64
+		formatString: 0
+		lineageTag: 137e7b30-fde4-4ef4-8a81-0cea67338f2c
+		summarizeBy: sum
+		sourceColumn: Semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesNombre
+		dataType: string
+		lineageTag: 761a77c9-7d0c-4958-90f7-2214375d4453
+		summarizeBy: none
+		sourceColumn: MesNombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiaNombre
+		dataType: string
+		lineageTag: 15ba125a-06b4-4e9f-9dfb-626dd6609136
+		summarizeBy: none
+		sourceColumn: DiaNombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column AñoFiscal
+		dataType: int64
+		formatString: 0
+		lineageTag: ee53ee1c-fb63-43a1-a2e0-94e023c63da1
+		summarizeBy: sum
+		sourceColumn: AñoFiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column TrimestreFiscal
+		dataType: int64
+		formatString: 0
+		lineageTag: d92ca999-6cc9-4da1-8fa5-354fcbb12a44
+		summarizeBy: sum
+		sourceColumn: TrimestreFiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesFiscal
+		dataType: string
+		lineageTag: 459d05b0-6ec5-40a0-8ca2-97784289451d
+		summarizeBy: none
+		sourceColumn: MesFiscal
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesFiscalNumero
+		dataType: int64
+		formatString: 0
+		lineageTag: 8337eaff-f6a3-44ab-af54-f72d2c84f0c8
+		summarizeBy: sum
+		sourceColumn: MesFiscalNumero
+
+		annotation SummarizationSetBy = Automatic
+
+	column Feriado
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5397b57c-dc5e-4d73-b31b-9d867977f545
+		summarizeBy: none
+		sourceColumn: Feriado
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiaSemana
+		dataType: string
+		lineageTag: a4aef676-625f-4883-8334-5a3c2d011835
+		summarizeBy: none
+		sourceColumn: DiaSemana
+
+		annotation SummarizationSetBy = Automatic
+
+	column Periodo = FORMAT('DimTiempo (5)'[Fecha],"yyyy")&"/"&FORMAT('DimTiempo (5)'[Fecha],"mm")
+		lineageTag: f4915a80-8505-425f-b9cd-23fbd29211a9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column HastaMesActual = ```
+			
+			IF(
+			    'DimTiempo (5)'[AñoMes] <= YEAR(TODAY()) * 100 + MONTH(TODAY()),
+			    1,
+			    0
+			)
+			
+			```
+		lineageTag: 7f45fcd5-9b6c-4bcc-8964-98de18101f11
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column AñoMes = 'DimTiempo (5)'[Año] * 100 + 'DimTiempo (5)'[MesNumero]
+		formatString: 0
+		lineageTag: 29ab107c-3d52-4d21-8c80-c1f344916885
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Indicador Año Fiscal' =
+			
+			-- 1. Identificamos el año en que inicia el año fiscal de la fila actual
+			VAR FechaFila = 'DimTiempo (5)'[Fecha]
+			VAR AnioFiscalFila = IF(MONTH(FechaFila) >= 7, YEAR(FechaFila), YEAR(FechaFila) - 1)
+			
+			-- 2. Identificamos el año en que inicia el año fiscal actual (basado en la fecha de hoy)
+			VAR FechaHoy = TODAY()
+			VAR AnioFiscalHoy = IF(MONTH(FechaHoy) >= 7, YEAR(FechaHoy), YEAR(FechaHoy) - 1)
+			
+			-- 3. Comparamos ambos años fiscales para asignar el código
+			RETURN
+			SWITCH(
+			    AnioFiscalFila,
+			    AnioFiscalHoy, 1,      -- Año fiscal actual
+			    AnioFiscalHoy - 1, 2,  -- Año fiscal anterior
+			    0                      -- Cualquier otro período
+			)
+		formatString: 0
+		lineageTag: e7ac5828-f3ec-460b-98c1-c0379731bbc7
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DimTiempo (5)' = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW"),
+				    General_DimTiempo = Origen{[Schema="General",Item="DimTiempo"]}[Data]
+				in
+				    General_DimTiempo
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Exception
+

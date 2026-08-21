@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "ASJ - Tablero Comercios pruebas reactivados"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "9376f235-0068-451e-8d07-82205f4b89dd"
+  }
+}

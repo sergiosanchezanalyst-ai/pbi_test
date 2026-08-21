@@ -1,0 +1,29 @@
+table DimComercioEcosistemaID_Unicos
+	lineageTag: 390aacc4-4257-4647-823d-6836c5ee6bfc
+
+	column ComercioEcosistemaID
+		formatString: 0
+		lineageTag: b6a056d3-6e4b-4d2f-901e-a8c591cbac0e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [ComercioEcosistemaID]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimComercioEcosistemaID_Unicos = calculated
+		mode: import
+		source =
+				
+				DISTINCT(
+				    SELECTCOLUMNS(
+				        FILTER(
+				            'DimComerciosReactivados',
+				            'DimComerciosReactivados'[FlagReactivadoAñoFiscal2026] = "Comercio Reactivado"
+				                || 'DimComerciosReactivados'[FlagReactivadoAñoFiscal2027] = "Comercio Reactivado"
+				        ),
+				        "ComercioEcosistemaID", 'DimComerciosReactivados'[ComercioEcosistemaID]
+				    )
+				)
+
+	annotation PBI_Id = a6fe6b82c5a341d6864a989512565ab7
+

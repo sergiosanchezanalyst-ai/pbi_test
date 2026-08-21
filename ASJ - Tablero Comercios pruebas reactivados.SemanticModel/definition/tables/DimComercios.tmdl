@@ -1,0 +1,326 @@
+table DimComercios
+	lineageTag: 7d2cbef3-1f59-4cc5-a036-5d02bd537e7f
+
+	column Ecosistema
+		dataType: string
+		lineageTag: f21d6630-3ba3-4606-8efc-1aef53f1b4fb
+		summarizeBy: none
+		sourceColumn: Ecosistema
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comercio
+		dataType: string
+		lineageTag: 1f8cd460-726b-4097-a855-1c9f43ee1598
+		summarizeBy: none
+		sourceColumn: Comercio
+
+		annotation SummarizationSetBy = Automatic
+
+	column SucursalComercio
+		dataType: string
+		lineageTag: bc4c52ff-62f9-43d9-a4cf-7399080bf760
+		summarizeBy: none
+		sourceColumn: SucursalComercio
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComercioID
+		dataType: int64
+		formatString: 0
+		lineageTag: a54d8517-ee2e-430e-8272-97760d0b2edc
+		summarizeBy: none
+		sourceColumn: ComercioID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SucursalID
+		dataType: int64
+		formatString: 0
+		lineageTag: f72b32c3-f41f-46c5-88ca-8c3850bea0a9
+		summarizeBy: count
+		sourceColumn: SucursalID
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeroEnte
+		dataType: string
+		lineageTag: 46f5c029-1159-4a6a-8ac5-6d6b6cb1f2ce
+		summarizeBy: none
+		sourceColumn: NumeroEnte
+
+		annotation SummarizationSetBy = Automatic
+
+	column RubroComercio
+		dataType: string
+		lineageTag: fc9584d9-c0b8-440f-acef-ffa093957728
+		summarizeBy: none
+		sourceColumn: RubroComercio
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaAlta
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 72aca446-807f-4f22-94ee-0e02c1a4db2b
+		summarizeBy: none
+		sourceColumn: FechaAlta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column FechaModificacion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 47c709eb-ccae-45db-96a1-feaf0af3cdd8
+		summarizeBy: none
+		sourceColumn: FechaModificacion
+
+		variation Variación
+			isDefault
+			relationship: 521a1590-fa26-4ebe-b70c-19641ae013a4
+			defaultHierarchy: LocalDateTable_cc1429fa-22c8-4436-8153-830b7ad86c8a.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaBaja
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: da91f5f8-7838-4ae3-83a8-a6f5ca555857
+		summarizeBy: none
+		sourceColumn: FechaBaja
+
+		variation Variación
+			isDefault
+			relationship: e2538388-ed76-4e18-88e8-3b343a6eab05
+			defaultHierarchy: LocalDateTable_435e2d1f-b628-4e3a-948e-b00c983748e9.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Habilitado
+		dataType: string
+		lineageTag: f27ba171-ae94-491e-b856-729e311fa3f5
+		summarizeBy: none
+		sourceColumn: Habilitado
+
+		annotation SummarizationSetBy = Automatic
+
+	column Entidad
+		dataType: string
+		lineageTag: aac03224-5163-4665-924f-fdbb4765fa65
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: Entidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column Localidad
+		dataType: string
+		lineageTag: f4a404c0-162d-41ee-9faf-98032ef65946
+		dataCategory: County
+		summarizeBy: none
+		sourceColumn: Localidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincia =
+			
+			SWITCH(
+			    'DimComercios'[Entidad],
+			    "Provincia de Santa Fe", "Santa Fe",
+			    "Provincia de Entre Ríos", "Entre Ríos",
+			    "Provincia de San Juan", "San Juan",
+			    "Provincia de Santa Cruz", "Santa Cruz",
+			    BLANK()
+			)
+		lineageTag: 9a49c6b2-9662-4b58-a594-1401a5573da6
+		dataCategory: StateOrProvince
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pais = "Argentina"
+		lineageTag: 754be64f-d338-4022-92f7-86c7325e501b
+		dataCategory: Country
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComercioEcosistemaID
+		dataType: int64
+		formatString: 0
+		lineageTag: c0a137b7-0a50-4e3f-807d-0f8940b37c60
+		summarizeBy: count
+		sourceColumn: ComercioEcosistemaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Columna_Reactivada = ```
+			
+			LOOKUPVALUE(
+			    DimComerciosReactivados[Flag_Reactivado], 
+			    DimComerciosReactivados[ComercioEcosistemaID],
+			    DimComercios[ComercioEcosistemaID]
+			)
+			```
+		lineageTag: 8b2b0767-913d-4b9a-aa36-8cf12df978f3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Localidad_1 =
+			
+			IF( DimComercios[Localidad] = "BAJO LAS TUNAS","LAS TUNAS",DimComercios[Localidad])
+		lineageTag: 0d19f365-0b8c-4822-b39b-b0e3b0894d3e
+		dataCategory: Place
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column GrupoRubroComercioID
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d18a33f-cc9b-4657-a76f-0c5250f6eee8
+		summarizeBy: none
+		sourceColumn: GrupoRubroComercioID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PersonaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 091ce301-81d8-4072-a9c7-fe534b2a15cc
+		summarizeBy: none
+		sourceColumn: PersonaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUIT = RELATED('PersonaUnica DimPersonas'[NumeroDocumento])
+		lineageTag: 481bfe4a-afbb-4c20-960a-92516661822b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Datos Completos' =
+			
+			"FECHA ALTA: "&
+			FORMAT(DimComercios[FechaAlta1],"YYYY")&
+			"-"&
+			FORMAT(DimComercios[FechaAlta1],"MM")&
+			"-"&
+			FORMAT(DimComercios[FechaAlta1],"DD")&
+			" / "&
+			"COMERCIO: " &
+			DimComercios[Comercio]&
+			" / "&
+			"NÚMERO ENTE: "&
+			DimComercios[NumeroEnte]&
+			" / "&
+			"CUIT: "&
+			DimComercios[CUIT]&
+			" / "
+			&"RUBRO: "&
+			DimComercios[RubroComercio]
+			
+			/*"FECHA ALTA: "&
+			DimComercios[FechaAlta1]&
+			" / "&
+			"COMERCIO: " &
+			DimComercios[Comercio]&
+			" / "&
+			"NÚMERO ENTE: "&
+			DimComercios[NumeroEnte]&
+			" / "&
+			"CUIT: "&
+			DimComercios[CUIT]&
+			" / "
+			&"RUBRO: "&
+			DimComercios[RubroComercio]
+			*/
+		lineageTag: 6fd99e20-0ec9-4aab-a550-e645818f1c1c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Datos Completos 1' = ```
+			
+			"COMERCIO: " &
+			DimComercios[Comercio]&
+			" / "&
+			"NÚMERO ENTE: "&
+			DimComercios[NumeroEnte]&
+			" / "&
+			"CUIT: "&
+			DimComercios[CUIT]&
+			" / "
+			&"RUBRO: "&
+			DimComercios[RubroComercio]
+			
+			/*
+			&
+			" / "
+			&"PROVINCIA: "&
+			DimComercios[Provincia]
+			*/
+			
+			&
+			" / "
+			&"FECHA ALTA: "&
+			DimComercios[FechaAlta]
+			
+			```
+		lineageTag: c8b63ffb-ea5f-442c-992a-a3b106411867
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaAlta1 = ```
+			DimComercios[FechaAlta] 
+			```
+		formatString: yyyy-mm-dd
+		lineageTag: e8a6c71d-c127-44f4-bd3e-a82b076936a8
+		summarizeBy: none
+
+		variation Variación
+			isDefault
+			relationship: 2a643ace-80ad-46d6-91fb-eb63ec629fb4
+			defaultHierarchy: LocalDateTable_22d08d76-d7fb-421a-847a-156c4f3f828a.'Jerarquía de fechas'
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column ProvinciaID
+		dataType: int64
+		formatString: 0
+		lineageTag: f6b515f6-e958-4ae4-b9bd-0adcfddf65fe
+		summarizeBy: count
+		sourceColumn: ProvinciaID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimComercios = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW"),
+				    PBI_uvDimComercios = Origen{[Schema="PBI",Item="uvDimComercios"]}[Data]
+				in
+				    PBI_uvDimComercios
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,95 @@
+table 'Operaciones DimEntidades'
+	lineageTag: d8cd50c0-7cff-4862-9715-23033541e243
+
+	column EntidadID
+		dataType: int64
+		formatString: 0
+		lineageTag: 0cd16386-17d0-41e4-8c09-18702d8eaa86
+		summarizeBy: none
+		sourceColumn: EntidadID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Entidad
+		dataType: string
+		lineageTag: ed152ce4-d7f5-4fa8-b7ca-29642c756541
+		summarizeBy: none
+		sourceColumn: Entidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column EntidadCorto
+		dataType: string
+		lineageTag: e0e3dd6f-9558-4801-a591-a26908d81f2b
+		summarizeBy: none
+		sourceColumn: EntidadCorto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Codigo
+		dataType: int64
+		formatString: 0
+		lineageTag: 285e3de5-949f-48da-b15d-e816924e136b
+		summarizeBy: sum
+		sourceColumn: Codigo
+
+		annotation SummarizationSetBy = Automatic
+
+	column GrupoEntidadID
+		dataType: int64
+		formatString: 0
+		lineageTag: c3a532cc-d548-4f58-a933-7b67bfb88c62
+		summarizeBy: count
+		sourceColumn: GrupoEntidadID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoEnteID
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c797562-763b-491f-9081-a38e0ee87eb8
+		summarizeBy: count
+		sourceColumn: TipoEnteID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EntidadDeComercio
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c8b7d945-71b5-45ed-89f7-e45d2638d300
+		summarizeBy: none
+		sourceColumn: EntidadDeComercio
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincia =
+			
+			VAR NombreEntidad = 'Operaciones DimEntidades'[Entidad]
+			RETURN
+			IF(
+			    CONTAINSSTRING(NombreEntidad, "Provincia de"),
+			    SWITCH(
+			        NombreEntidad,
+			        "Provincia de Santa Fe", "Santa Fe",
+			        "Provincia de Entre Ríos", "Entre Ríos",
+			        "Provincia de San Juan", "San Juan",
+			        "Provincia de Santa Cruz", "Santa Cruz",
+			        NombreEntidad
+			    ),
+			    NombreEntidad
+			)
+		lineageTag: b91415ec-69e4-47bf-8668-86a83f6a8e9f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Operaciones DimEntidades' = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW"),
+				    Operaciones_DimEntidades = Origen{[Schema="Operaciones",Item="DimEntidades"]}[Data]
+				in
+				    Operaciones_DimEntidades
+

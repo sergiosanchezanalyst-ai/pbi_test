@@ -1,0 +1,79 @@
+table 'DimComercios_Unicos (Fact)'
+	lineageTag: aaa44031-835c-47dd-a3d2-84f20bf6ed17
+
+	column ComercioID
+		formatString: 0
+		lineageTag: 51dccdba-a024-4930-9c0e-24d812557e8d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DimComercios[ComercioID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nombre Comercio'
+		lineageTag: afbb32ff-640c-40e6-b64c-abf12df738b8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Nombre Comercio]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numero Ente'
+		lineageTag: 7ef4935d-4660-4b63-94c7-3008d26d1e56
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Numero Ente]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rubro
+		lineageTag: fafb870c-5de2-46fd-94c3-c5f29628675e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Rubro]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincia
+		lineageTag: 1f7b94dc-8207-4da3-9fbc-6b83697633ba
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Provincia]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Localidad
+		lineageTag: 7a95388d-a392-41d4-9aa4-98b0814efcac
+		dataCategory: Place
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Localidad]
+
+		annotation SummarizationSetBy = Automatic
+
+	column País = "Argentina"
+		lineageTag: b4da9432-ef09-4598-a0fa-931ac99a60e5
+		dataCategory: Country
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DimComercios_Unicos (Fact)' = calculated
+		mode: import
+		source = ```
+				
+				SUMMARIZE (
+				    DimComercios,
+				    DimComercios[ComercioID],
+				    "Nombre Comercio", MAX ( DimComercios[Comercio] ),
+				    "Numero Ente",     MAX ( DimComercios[NumeroEnte] ),
+				    "Rubro",           MAX ( DimComercios[RubroComercio] ),
+				    "Provincia",           MAX ( DimComercios[Provincia] ),
+				    "Localidad",MAX ( DimComercios[Localidad_1] )
+				)
+				
+				```
+
+	annotation PBI_Id = 2043ac6175ae4b079ca034e20def1c90
+

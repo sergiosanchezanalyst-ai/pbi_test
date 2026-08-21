@@ -1,0 +1,69 @@
+table 'PersonaUnica DimPersonas'
+	lineageTag: 4147b548-1a45-4cd8-924e-502e706d4511
+
+	column PersonaID
+		dataType: int64
+		formatString: 0
+		lineageTag: e6f8a589-fdcd-429d-b834-5d3d524b8231
+		summarizeBy: none
+		sourceColumn: PersonaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Persona
+		dataType: string
+		lineageTag: ddcff3ac-abae-4369-8af1-4b00371e1e7d
+		summarizeBy: none
+		sourceColumn: Persona
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoDocumentoID
+		dataType: int64
+		formatString: 0
+		lineageTag: 94e2b368-9a1e-4300-91b0-ca87d1b093d3
+		summarizeBy: count
+		sourceColumn: TipoDocumentoID
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeroDocumento
+		dataType: string
+		lineageTag: 2ced071c-c62e-4ab2-9cb5-dfb20adbfdc1
+		summarizeBy: none
+		sourceColumn: NumeroDocumento
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActividadClienteID
+		dataType: int64
+		formatString: 0
+		lineageTag: 910fadeb-d7a1-42e0-a380-685573622fde
+		summarizeBy: count
+		sourceColumn: ActividadClienteID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoPersonaID
+		dataType: int64
+		formatString: 0
+		lineageTag: dca726bb-bb0c-4142-b4e0-153f6731930e
+		summarizeBy: count
+		sourceColumn: TipoPersonaID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'PersonaUnica DimPersonas' = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW"),
+				    PersonaUnica_DimPersonas = Origen{[Schema="PersonaUnica",Item="DimPersonas"]}[Data]
+				in
+				    PersonaUnica_DimPersonas
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

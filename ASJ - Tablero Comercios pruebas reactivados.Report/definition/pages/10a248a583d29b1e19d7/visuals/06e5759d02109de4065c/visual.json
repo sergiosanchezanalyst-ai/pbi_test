@@ -1,0 +1,139 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "06e5759d02109de4065c",
+  "position": {
+    "x": 57.142857142857146,
+    "y": 174.28571428571431,
+    "z": 1000,
+    "height": 865.71428571428578,
+    "width": 758.57142857142867,
+    "tabOrder": 9002
+  },
+  "visual": {
+    "visualType": "aiNarratives",
+    "objects": {
+      "narrativeSelection": [
+        {
+          "properties": {
+            "dismissSelectionScreen": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "userPrompt": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Agregá un párrafo de texto con dos oraciones, usando los valores de las siguientes medidas DAX (no inventes ni calcules nada nuevo, solo mostrá el resultado de cada medida):\nPrimera oración: \"En el período [Periodo Seleccionado], se dieron de alta [Cantidad Nuevos Comercios] nuevos comercios.\"\nSegunda oración: \"De ellos, [Cantidad Sin Transacciones] no registraron transacciones a la fecha.\"\nDonde:\n[Periodo Seleccionado] = texto del rango de fechas seleccionado en el slicer de Período FY\n[Cantidad Nuevos Comercios] = cantidad de comercios con Fecha Alta dentro del período seleccionado\n[Cantidad Sin Transacciones] = de esos comercios nuevos, cuántos no tienen TRX en la matriz Cantidad de entes nuevos. Comercios nuevos sin trx nuevo\nNo agregues más datos, gráficos ni explicaciones adicionales.'"
+                }
+              }
+            },
+            "selectedVisualsJson": {
+              "expr": {
+                "Literal": {
+                  "Value": "'{\"isEntireReportSelected\":false,\"sections\":{\"10a248a583d29b1e19d7\":{\"isEntireSectionSelected\":true}}}'"
+                }
+              }
+            },
+            "useAllVisuals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "useCurrentLocale": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "text": [
+        {
+          "properties": {
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "summary": [
+        {
+          "properties": {
+            "autoRefresh": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "25D"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

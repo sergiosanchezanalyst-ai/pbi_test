@@ -1,0 +1,31 @@
+table Selector_medidas
+	lineageTag: 362a492d-5bdd-4324-afc1-31f5073aadb2
+
+	column ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 3b843226-8769-4915-a13b-196482d55020
+		summarizeBy: count
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Medida
+		dataType: string
+		lineageTag: 4841e3b6-b75d-4b94-bdba-81ecec03263c
+		summarizeBy: none
+		sourceColumn: Medida
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Selector_medidas = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUQrLzynNTc1T0FDRVIrViVYyAoqFFCXmFScmJ2fm56UWK8XGAgA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [ID = _t, Medida = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"ID", Int64.Type}, {"Medida", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+

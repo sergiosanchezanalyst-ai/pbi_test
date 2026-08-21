@@ -1,0 +1,44 @@
+table 'Operaciones DimComerciosRubrosComercios'
+	lineageTag: 4d1c9899-8db5-463c-935f-cf2b7a1b35a7
+
+	column ComercioRubroComercioID
+		dataType: int64
+		formatString: 0
+		lineageTag: e004a9fd-df7e-442c-9398-ca6c670b8e62
+		summarizeBy: none
+		sourceColumn: ComercioRubroComercioID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComercioEcosistemaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 69325b23-279e-43a4-9a76-fbcc2592159c
+		summarizeBy: count
+		sourceColumn: ComercioEcosistemaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RubroComercioID
+		dataType: int64
+		formatString: 0
+		lineageTag: c1ee8d42-2069-47b7-8808-ab7a1dd661a9
+		summarizeBy: none
+		sourceColumn: RubroComercioID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Operaciones DimComerciosRubrosComercios' = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW"),
+				    Operaciones_DimComerciosRubrosComercios = Origen{[Schema="Operaciones",Item="DimComerciosRubrosComercios"]}[Data]
+				in
+				    Operaciones_DimComerciosRubrosComercios
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

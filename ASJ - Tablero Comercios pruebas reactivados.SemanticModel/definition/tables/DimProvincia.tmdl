@@ -1,0 +1,44 @@
+table DimProvincia
+	lineageTag: db136681-a924-4ee6-9f73-22a133b86bf2
+
+	column IDProvincia
+		dataType: int64
+		formatString: 0
+		lineageTag: 10fa0450-3114-4913-9ff8-2fe77d2903c8
+		summarizeBy: sum
+		sourceColumn: IDProvincia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincia
+		dataType: string
+		lineageTag: f49f115d-e4df-47b0-b607-650574ee67b8
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: Provincia
+		sortByColumn: IDProvincia
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column País
+		dataType: string
+		lineageTag: b07ff7d8-4764-41da-a078-189b5e90056e
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: País
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimProvincia = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUQpOzCtJVHBLBTIdi9JT80oy8xKVYnWilYyAIq55JUWpCkGH1+YXY8gbQzQreJUm5mFImsBNdi4qrUKVjgUA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [IDProvincia = _t, Provincia = _t, País = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"IDProvincia", Int64.Type}, {"Provincia", type text}, {"País", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,196 @@
+table ComerciosReactivados_Long
+	lineageTag: 795ee25f-d871-4373-ae69-844264e37ad3
+
+	column Flag_Reactivado
+		lineageTag: 6b6fb400-2b09-487b-8f74-65f85510ca1f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Flag_Reactivado]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComercioEcosistemaID
+		formatString: 0
+		lineageTag: 6a914cad-6c8c-49b6-a2ed-fcc9a3045e24
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [ComercioEcosistemaID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeroEnte
+		lineageTag: 9610e26d-98d2-477f-9f00-0655645ed3e3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [NumeroEnte]
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaAlta
+		formatString: Long Date
+		lineageTag: b8b20c3a-51f6-4768-9a06-31a6fcd9858e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [FechaAlta]
+
+		variation Variación
+			isDefault
+			relationship: d7d0ff7f-e0f0-4f67-8b36-80d8d8771b5f
+			defaultHierarchy: LocalDateTable_e82c90bc-7c99-4fde-9dad-5f57342ed930.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EntidadID
+		formatString: 0
+		lineageTag: 18d29981-3b6b-410c-80fb-7ef1a2e25e9d
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: [EntidadID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column PersonaID
+		formatString: 0
+		lineageTag: a89d50c4-a64f-4235-9ce8-eeec154c618a
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: [PersonaID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComercioRubroComercioID
+		formatString: 0
+		lineageTag: 745906de-2441-4166-9612-a13a3642d024
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: [ComercioRubroComercioID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUIT
+		lineageTag: d54c7ca0-c5b5-499a-a1b4-9bd2e0cd8ce0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [CUIT]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Periodo
+		lineageTag: edee7810-5de1-4b1c-afdc-01efe1e5383f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Periodo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincia
+		lineageTag: dc5fbc0d-b590-44fb-bb23-2b3ec4edd65f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Provincia]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comercio
+		lineageTag: e6cfba7d-2220-4ecd-b933-d25a003fb80f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Comercio]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AñoFiscal
+		formatString: 0
+		lineageTag: a362fec5-41b2-4a20-891b-f2906e767639
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [AñoFiscal]
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaPrimeraTransaccion
+		formatString: General Date
+		lineageTag: 6d7094cb-8f20-4fa0-93d8-11d54493932b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [FechaPrimeraTransaccion]
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaPrimeraTransaccionAñoFiscal
+		formatString: 0
+		lineageTag: 12f5eca8-ea59-46b6-b98d-fdb63fc8c3c2
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [FechaPrimeraTransaccionAñoFiscal]
+
+		annotation SummarizationSetBy = Automatic
+
+	column FlagReactivadoAñoFiscal
+		lineageTag: 38acebca-c1a7-4622-958c-47ab668db7a1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [FlagReactivadoAñoFiscal]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DatosCompletos
+		lineageTag: 3da79852-e33d-4ff2-9fe4-2a0e9d3edea0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DatosCompletos]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ComerciosReactivados_Long = calculated
+		mode: import
+		source =
+				
+				UNION(
+				    SELECTCOLUMNS(
+				        'DimComerciosReactivados',
+				        "Flag_Reactivado", 'DimComerciosReactivados'[Flag_Reactivado],
+				        "ComercioEcosistemaID", 'DimComerciosReactivados'[ComercioEcosistemaID],
+				        "NumeroEnte", 'DimComerciosReactivados'[NumeroEnte],
+				        "FechaAlta", 'DimComerciosReactivados'[FechaAlta],
+				        "EntidadID", 'DimComerciosReactivados'[EntidadID],
+				        "PersonaID", 'DimComerciosReactivados'[PersonaID],
+				        "ComercioRubroComercioID", 'DimComerciosReactivados'[ComercioRubroComercioID],
+				        "CUIT", 'DimComerciosReactivados'[CUIT],
+				        "Periodo", 'DimComerciosReactivados'[Periodo],
+				        "Provincia", 'DimComerciosReactivados'[Provincia],
+				        "Comercio", 'DimComerciosReactivados'[Comercio],
+				        "AñoFiscal", 2026,
+				        "FechaPrimeraTransaccion", 'DimComerciosReactivados'[FechaPrimeraTransaccion_Date_2026],
+				        "FechaPrimeraTransaccionAñoFiscal", 'DimComerciosReactivados'[FechaPrimeraTransaccionAñoFiscal2026],
+				        "FlagReactivadoAñoFiscal", 'DimComerciosReactivados'[FlagReactivadoAñoFiscal2026],
+				        "DatosCompletos", 'DimComerciosReactivados'[Datos Completos FY 2026]
+				    ),
+				    SELECTCOLUMNS(
+				        FILTER(
+				            'DimComerciosReactivados',
+				            NOT ISBLANK('DimComerciosReactivados'[FechaPrimeraTransaccion_Date_2027])
+				        ),
+				        "Flag_Reactivado", 'DimComerciosReactivados'[Flag_Reactivado],
+				        "ComercioEcosistemaID", 'DimComerciosReactivados'[ComercioEcosistemaID],
+				        "NumeroEnte", 'DimComerciosReactivados'[NumeroEnte],
+				        "FechaAlta", 'DimComerciosReactivados'[FechaAlta],
+				        "EntidadID", 'DimComerciosReactivados'[EntidadID],
+				        "PersonaID", 'DimComerciosReactivados'[PersonaID],
+				        "ComercioRubroComercioID", 'DimComerciosReactivados'[ComercioRubroComercioID],
+				        "CUIT", 'DimComerciosReactivados'[CUIT],
+				        "Periodo", 'DimComerciosReactivados'[Periodo],
+				        "Provincia", 'DimComerciosReactivados'[Provincia],
+				        "Comercio", 'DimComerciosReactivados'[Comercio],
+				        "AñoFiscal", 2027,
+				        "FechaPrimeraTransaccion", 'DimComerciosReactivados'[FechaPrimeraTransaccion_Date_2027],
+				        "FechaPrimeraTransaccionAñoFiscal", 'DimComerciosReactivados'[FechaPrimeraTransaccionAñoFiscal2027],
+				        "FlagReactivadoAñoFiscal", 'DimComerciosReactivados'[FlagReactivadoAñoFiscal2027],
+				        "DatosCompletos", 'DimComerciosReactivados'[Datos Completos 2027]
+				    )
+				)
+
+	annotation PBI_Id = ed0995c016f24b91937c0c9c3eba2565
+

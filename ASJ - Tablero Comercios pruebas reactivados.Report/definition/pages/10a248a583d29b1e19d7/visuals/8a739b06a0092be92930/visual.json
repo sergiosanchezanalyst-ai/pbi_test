@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "8a739b06a0092be92930",
+  "position": {
+    "x": 1683.0807593025093,
+    "y": 101.41640472720249,
+    "z": 0,
+    "height": 12.946775071557765,
+    "width": 12.946775071557765,
+    "tabOrder": 9011
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Comercios Nuevos sin Trx nuevo"
+                }
+              },
+              "queryRef": "Medidas.Comercios Nuevos sin Trx nuevo",
+              "nativeQueryRef": "Comercios Nuevos sin Trx nuevo"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

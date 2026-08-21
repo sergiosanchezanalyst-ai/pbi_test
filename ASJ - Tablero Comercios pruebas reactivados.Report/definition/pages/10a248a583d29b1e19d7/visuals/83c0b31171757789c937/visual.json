@@ -1,0 +1,54 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "83c0b31171757789c937",
+  "position": {
+    "x": 1881.4285714285716,
+    "y": 98.571428571428584,
+    "z": 2000,
+    "height": 12,
+    "width": 12,
+    "tabOrder": 9008
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Comercios nuevos sin transacciones FY 2027"
+                }
+              },
+              "queryRef": "Medidas.Comercios nuevos sin transacciones FY 2027",
+              "nativeQueryRef": ".",
+              "displayName": "."
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Comercios Nuevos sin Trx"
+                }
+              },
+              "queryRef": "Medidas.Comercios Nuevos sin Trx",
+              "nativeQueryRef": ".1",
+              "displayName": "."
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

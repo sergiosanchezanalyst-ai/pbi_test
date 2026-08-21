@@ -1,0 +1,183 @@
+table 'DimComercios (2)'
+	lineageTag: f374d0a9-db0b-4f63-a2be-822c689fe3af
+
+	column Ecosistema
+		dataType: string
+		lineageTag: 4e2effbc-8a76-4edf-bd19-0d0e173d21b1
+		summarizeBy: none
+		sourceColumn: Ecosistema
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comercio
+		dataType: string
+		lineageTag: 8473663a-9a86-414c-8502-11f960cd2f58
+		summarizeBy: none
+		sourceColumn: Comercio
+
+		annotation SummarizationSetBy = Automatic
+
+	column SucursalComercio
+		dataType: string
+		lineageTag: c5cdd036-3cab-4abc-9cc9-63a84a71264b
+		summarizeBy: none
+		sourceColumn: SucursalComercio
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComercioID
+		dataType: int64
+		formatString: 0
+		lineageTag: d0773fa7-ab78-4ad2-bd3a-b1f302900c6c
+		summarizeBy: count
+		sourceColumn: ComercioID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SucursalID
+		dataType: int64
+		formatString: 0
+		lineageTag: d0b2554b-c32d-47bb-9020-2345c425265e
+		summarizeBy: count
+		sourceColumn: SucursalID
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeroEnte
+		dataType: string
+		lineageTag: ac0556a8-d05c-4c7c-beae-657651530ef5
+		summarizeBy: none
+		sourceColumn: NumeroEnte
+
+		annotation SummarizationSetBy = Automatic
+
+	column RubroComercio
+		dataType: string
+		lineageTag: c39c6737-e47d-4b31-b1ef-89e326c298fc
+		summarizeBy: none
+		sourceColumn: RubroComercio
+
+		annotation SummarizationSetBy = Automatic
+
+	column GrupoRubroComercioID
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a012237-fd83-4419-9f81-873ec26a3b75
+		summarizeBy: count
+		sourceColumn: GrupoRubroComercioID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaAlta
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a8b0e5d0-452c-413c-a5ba-02a55ca3e90e
+		summarizeBy: none
+		sourceColumn: FechaAlta
+
+		variation Variación
+			isDefault
+			relationship: ed347968-458c-4013-b3dd-11760c2be758
+			defaultHierarchy: LocalDateTable_126441fc-7097-434a-8f4e-5ac47bf561f1.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaModificacion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1f2e2299-eb12-482a-af80-413aa4bac2b1
+		summarizeBy: none
+		sourceColumn: FechaModificacion
+
+		variation Variación
+			isDefault
+			relationship: deb53268-0710-4d95-906d-88389506bbe1
+			defaultHierarchy: LocalDateTable_d60a1e25-b9ff-443a-bfbf-4c881934f39d.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FechaBaja
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 69714f25-8d1d-4b5b-a926-5b4dd79e0957
+		summarizeBy: none
+		sourceColumn: FechaBaja
+
+		variation Variación
+			isDefault
+			relationship: 9b285d50-02e3-483d-96cc-fce34407f8ad
+			defaultHierarchy: LocalDateTable_84d41c66-b234-4a83-a633-9ce06d56e42b.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Habilitado
+		dataType: string
+		lineageTag: b87029a1-b8d4-4407-a30c-a57a9f905e22
+		summarizeBy: none
+		sourceColumn: Habilitado
+
+		annotation SummarizationSetBy = Automatic
+
+	column Entidad
+		dataType: string
+		lineageTag: 20a44a56-90c3-4656-bb29-8d54a40eb77e
+		summarizeBy: none
+		sourceColumn: Entidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column Localidad
+		dataType: string
+		lineageTag: 8711a00d-cf21-4f3a-ba81-6eef5d7ceb08
+		summarizeBy: none
+		sourceColumn: Localidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProvinciaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 511bcefc-38bf-4d26-a18b-b08b19a4e9af
+		summarizeBy: count
+		sourceColumn: ProvinciaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComercioEcosistemaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 1ffe131c-0ee7-4b5e-9c1d-1cc501c70eef
+		summarizeBy: count
+		sourceColumn: ComercioEcosistemaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PersonaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 76283f28-4bc7-413e-ad8c-2ae5b49b6530
+		summarizeBy: count
+		sourceColumn: PersonaID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DimComercios (2)' = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW"),
+				    PBI_uvDimComercios = Origen{[Schema="PBI",Item="uvDimComercios"]}[Data]
+				in
+				    PBI_uvDimComercios
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

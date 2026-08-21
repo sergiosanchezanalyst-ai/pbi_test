@@ -1,0 +1,40 @@
+table 'CFT - MES'
+	lineageTag: 76935dc0-da1e-4245-a536-09e41dc801f6
+
+	column Mes
+		dataType: string
+		lineageTag: f358d13c-73e2-4f0d-a1ee-c3d4abf36e45
+		summarizeBy: none
+		sourceColumn: Mes
+		sortByColumn: Índice
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Índice
+		dataType: int64
+		formatString: 0
+		lineageTag: 93d6f78f-4369-4fdb-8ec4-92d94bef0079
+		summarizeBy: none
+		sourceColumn: Índice
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'CFT - MES' = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("bZK7TgMxEEV/ZbWijEbztl2iQCQaKEIXpSFaoTSEAvH9TLRZL5HduTjyzD1zD4dRhu3+ZdyM29378Ph5idfwMBCQOZj7MB4398x++l4YVgFL2DJvp5+ZUUA0UJOWeb38zowAJwV3bZmn82mZlcyApDPr+WuaGQYjBTNumd30sTDICOw0M97NjqDZoFBqoRq+AHmKxXPL1PBsCNkEvPdTjU+JYlbIlM5fq4CIpu6QsrZUVXA9mooB9gJWCUQZSuxl+XaW0ldOXoCxtMw/5eoZImfLrNOAiKNOt3+Ie86lhASMFizXu8OqdQ9Plh24aAer4kXiPDl6xbmDrcXz2MsNMvawKoIjomOJJqcOVl1IXAc1MO4lXRsYUosqCF4jHP8A", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [CSI = _t, Mes = _t, #" Volumen ($) CFT " = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"CSI", type text}, {"Mes", type text}, {" Volumen ($) CFT ", Currency.Type}}),
+				    #"Otras columnas quitadas" = Table.SelectColumns(#"Tipo cambiado",{"Mes"}),
+				    #"Duplicados quitados" = Table.Distinct(#"Otras columnas quitadas"),
+				    #"Índice agregado" = Table.AddIndexColumn(#"Duplicados quitados", "Índice", 1, 1, Int64.Type)
+				in
+				    #"Índice agregado"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

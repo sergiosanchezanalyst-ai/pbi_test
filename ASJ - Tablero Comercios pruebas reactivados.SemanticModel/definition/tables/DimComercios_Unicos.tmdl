@@ -1,0 +1,83 @@
+table DimComercios_Unicos
+	lineageTag: 7034fa33-6f2e-4e98-9f54-b6148f03b0a8
+
+	column ComercioID
+		formatString: 0
+		lineageTag: e0aaebfe-280c-4716-8549-dc29eec66f2a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DimComercios[ComercioID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nombre Comercio'
+		lineageTag: 7b13b4b4-9a4d-478c-8293-bff4cbf658b7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Nombre Comercio]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComercioID_Comercios = DimComercios_Unicos[ComercioID]&" - "&DimComercios_Unicos[Nombre Comercio]
+		lineageTag: 3991fde3-daf2-4cb4-999d-0798fb8afcee
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numero Ente'
+		lineageTag: ff8982b8-18bd-42fc-aa44-b4b00f109841
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Numero Ente]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rubro
+		lineageTag: 432de623-5c43-4b0e-a58f-743e7c191cf2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Rubro]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincia
+		lineageTag: 0a78f9dc-a15d-4f41-ae9e-843b4d10fa08
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Provincia]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Localidad
+		lineageTag: 600d055f-6f7a-4a5d-b072-befdfc99f2f6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Localidad]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimComercios_Unicos = calculated
+		mode: import
+		source = ```
+				
+				SUMMARIZE (
+				    DimComercios,
+				    DimComercios[ComercioID],
+				    "Nombre Comercio", MAX ( DimComercios[Comercio] ),
+				    "Numero Ente",     MAX ( DimComercios[NumeroEnte] ),
+				    "Rubro",           MAX ( DimComercios[RubroComercio] ),
+				    "Provincia",           MAX ( DimComercios[Provincia] ),
+				    "Localidad",MAX ( DimComercios[Localidad_1] )
+				)
+				
+				/*DimComercios_Unicos = 
+				SUMMARIZE (
+				    DimComercios,
+				    DimComercios[IdComercio],
+				    "Nombre Comercio", MAX ( DimComercios[NombreComercio] ),
+				    "Numero Ente",     MAX ( DimComercios[NumeroEnte] )
+				)*/
+				```
+
+	annotation PBI_Id = 9137221536a7480da33a60c3d90fe1db
+

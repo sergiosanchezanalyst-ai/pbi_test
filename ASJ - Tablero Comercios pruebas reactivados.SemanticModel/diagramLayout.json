@@ -1,0 +1,1950 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 4051.999918619792,
+        "y": 274.66667175292969
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 3197.9873404464888,
+            "y": 1070.4119882376185
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "58ff2982-64c2-4d06-834a-b055bae093a6",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2111.6042904317951,
+            "y": 555.9606982962207
+          },
+          "nodeIndex": "DimComercios",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1533.7341049282072,
+            "y": 729.25238734947413
+          },
+          "nodeIndex": "DimTiempo",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3481.9873404464888,
+            "y": 1058.4119882376185
+          },
+          "nodeIndex": "DimComerciosReactivados",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1823.3748311522284,
+            "y": 729.4041907466443
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1674.2732382125041,
+            "y": 1085.0166344836559
+          },
+          "nodeIndex": "DimEstadoTransacciones",
+          "nodeLineageTag": "4ab8ceeb-40e1-40d0-819e-2565f1cec9ce",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1355.2173717366168,
+            "y": 1081.4202231845547
+          },
+          "nodeIndex": "DimCampañas",
+          "nodeLineageTag": "ad7da84e-3b91-4140-9b09-dcafa15c2028",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3765.9873404464888,
+            "y": 1058.4119882376185
+          },
+          "nodeIndex": "DimCampañasExclusiones",
+          "nodeLineageTag": "90c7afa7-b500-47b8-ba9e-b355b90b82ec",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3141.7810483122626,
+            "y": 661.89431815377634
+          },
+          "nodeIndex": "DimProvincia",
+          "nodeLineageTag": "db136681-a924-4ee6-9f73-22a133b86bf2",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2678.1033020432051,
+            "y": 395.26381070236215
+          },
+          "nodeIndex": "DimComercios_Unicos",
+          "nodeLineageTag": "7034fa33-6f2e-4e98-9f54-b6148f03b0a8",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2978.769968709872,
+            "y": 594.59714403569546
+          },
+          "nodeIndex": "Selector_medidas",
+          "nodeLineageTag": "362a492d-5bdd-4324-afc1-31f5073aadb2",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3262.769968709872,
+            "y": 570.59714403569546
+          },
+          "nodeIndex": "Rango_Trx",
+          "nodeLineageTag": "85620b1c-57d6-4e9d-ba13-0a3ed58cb47e",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3546.769968709872,
+            "y": 558.59714403569546
+          },
+          "nodeIndex": "DimComercios_Unicos (Fact)",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3474.1033020432055,
+            "y": 851.26381070236209
+          },
+          "nodeIndex": "DimGrupoRubrosComercios",
+          "nodeLineageTag": "7f583f63-34c3-42a6-93d3-1396d89ff1ee",
+          "size": {
+            "height": 145,
+            "width": 339
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4114.769968709872,
+            "y": 594.59714403569546
+          },
+          "nodeIndex": "Rubros_2",
+          "nodeLineageTag": "e816f66a-e301-4d4b-9430-5a783a151797",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4741.46857709434,
+            "y": 469.9998266555034
+          },
+          "nodeIndex": "DimTiempo (2)",
+          "nodeLineageTag": "e81f28a2-b0cc-40f6-9f75-1352b400e109",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3655.10693767898,
+            "y": 1037.9996533110068
+          },
+          "nodeIndex": "Operaciones DimComerciosRubrosComercios",
+          "nodeLineageTag": "4d1c9899-8db5-463c-935f-cf2b7a1b35a7",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3613.5271358067494,
+            "y": 157.252716574621
+          },
+          "nodeIndex": "Operaciones DimEntidades",
+          "nodeLineageTag": "d8cd50c0-7cff-4862-9715-23033541e243",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5025.46857709434,
+            "y": 531.9998266555034
+          },
+          "nodeIndex": "PersonaUnica DimPersonas",
+          "nodeLineageTag": "4147b548-1a45-4cd8-924e-502e706d4511",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3543.8853500871232,
+            "y": 763.79804229672482
+          },
+          "nodeIndex": "Operaciones DimRubrosComercios",
+          "nodeLineageTag": "fe050500-85df-467f-bc8e-1388ef487cdb",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3654.380555730841,
+            "y": -50
+          },
+          "nodeIndex": "DimProvincia 2",
+          "nodeLineageTag": "aab9f03e-b04b-4cbb-9d92-02dd6646d4d2",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5309.46857709434,
+            "y": 543.9998266555034
+          },
+          "nodeIndex": "Campañas_reintegros",
+          "nodeLineageTag": "7dca921f-1414-4141-86bb-b3d72febc4d0",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3093.5525969732553,
+            "y": 755.79637278764721
+          },
+          "nodeIndex": "Operaciones DimFormaPagos",
+          "nodeLineageTag": "97dcc5f7-3b7e-42bf-8345-33a21d2e38f0",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3381.6582278314886,
+            "y": 459.80832255847486
+          },
+          "nodeIndex": "PBI uvFactCampañasMensualPorRubro",
+          "nodeLineageTag": "d5494353-9f2a-49a9-a996-862a5aa242ac",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5593.46857709434,
+            "y": 531.9998266555034
+          },
+          "nodeIndex": "TODO",
+          "nodeLineageTag": "20de5cf1-7b7b-490d-8183-da4f27046b6e",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4223.29168885961,
+            "y": 496.80477575061525
+          },
+          "nodeIndex": "CFT",
+          "nodeLineageTag": "8cafaf87-a879-4236-8db5-efa41bf05356",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4507.46857709434,
+            "y": 522.12976838305
+          },
+          "nodeIndex": "CFT - MES",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3939.10693767898,
+            "y": 489.86988492795695
+          },
+          "nodeIndex": "CFT - CUOTAS",
+          "nodeLineageTag": "243cb5aa-798a-41d5-9e3b-2d25bfb6e6cb",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5877.46857709434,
+            "y": 469.9998266555034
+          },
+          "nodeIndex": "DimComercios (2)",
+          "nodeLineageTag": "f374d0a9-db0b-4f63-a2be-822c689fe3af",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4641.2512053577229,
+            "y": 1092.5083172418281
+          },
+          "nodeIndex": "Comercios_nuevos_2027",
+          "nodeLineageTag": "6bcc5e9f-27b0-427e-b0ca-e4ceb37e6b96",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4806.2512053577229,
+            "y": 497.25415862091404
+          },
+          "nodeIndex": "DimTiempo (5)",
+          "nodeLineageTag": "27b8370f-a3bf-421f-91cc-840aad15aa8f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4191.2512053577229,
+            "y": 820.58749195424741
+          },
+          "nodeIndex": "ComerciosReactivados_Long",
+          "nodeLineageTag": "795ee25f-d871-4373-ae69-844264e37ad3",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4806.2512053577229,
+            "y": 547.254158620914
+          },
+          "nodeIndex": "DimComercioEcosistemaID_Unicos",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas las tablas",
+      "zoomValue": 60,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 221.11111111111111
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 343.74074215359155,
+            "y": 424.44444444444429
+          },
+          "nodeIndex": "DimComercios",
+          "nodeLineageTag": "7d2cbef3-1f59-4cc5-a036-5d02bd537e7f",
+          "size": {
+            "height": 361.11111111111114,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 200.58449639214413
+          },
+          "nodeIndex": "DimTiempo",
+          "nodeLineageTag": "9710fb8f-37cf-4f74-b03b-cf3c23feb2fa",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 7,
+          "expandedHeight": 300
+        },
+        {
+          "location": {
+            "x": 519.72222349378808,
+            "y": 0
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "nodeLineageTag": "71b37b55-3971-432f-aad9-63142e7c7f5c",
+          "size": {
+            "height": 363.33333333333337,
+            "width": 321.77777777777783
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1038.1851865980361,
+            "y": 198.36227416992185
+          },
+          "nodeIndex": "DimEstadoTransacciones",
+          "nodeLineageTag": "4ab8ceeb-40e1-40d0-819e-2565f1cec9ce",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 449.44444444444446
+          },
+          "nodeIndex": "DimComerciosReactivados",
+          "nodeLineageTag": "7215a4d4-da96-49c2-9199-be9f2d35fc8d",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1022.6296310424801,
+            "y": 711.69560750325536
+          },
+          "nodeIndex": "DimProvincia",
+          "nodeLineageTag": "db136681-a924-4ee6-9f73-22a133b86bf2",
+          "size": {
+            "height": 269.77777777777783,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 981.51851993136927,
+            "y": 402.06597222222217
+          },
+          "nodeIndex": "DimComercios_Unicos",
+          "nodeLineageTag": "7034fa33-6f2e-4e98-9f54-b6148f03b0a8",
+          "size": {
+            "height": 269.1111111111112,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 964.85185326470264,
+            "y": 12.806701660156222
+          },
+          "nodeIndex": "DimCampañas",
+          "nodeLineageTag": "ad7da84e-3b91-4140-9b09-dcafa15c2028",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 617.07407548692493,
+            "y": 593.91781277126722
+          },
+          "nodeIndex": "DimComercios_Unicos (Fact)",
+          "nodeLineageTag": "aaa44031-835c-47dd-a3d2-84f20bf6ed17",
+          "size": {
+            "height": 104,
+            "width": 291.77777777777783
+          },
+          "zIndex": 9,
+          "expandedHeight": 248
+        }
+      ],
+      "name": "Comercios",
+      "zoomValue": 90,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 2,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 45.166667938232422,
+            "y": 10.026046752929688
+          },
+          "nodeIndex": "DimProvincia",
+          "nodeLineageTag": "db136681-a924-4ee6-9f73-22a133b86bf2",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 522.16666793823242,
+            "y": 14.026046752929688
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "nodeLineageTag": "71b37b55-3971-432f-aad9-63142e7c7f5c",
+          "size": {
+            "height": 353,
+            "width": 334
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 136.16666793823242,
+            "y": 297.02604675292969
+          },
+          "nodeIndex": "DimComercios",
+          "nodeLineageTag": "7d2cbef3-1f59-4cc5-a036-5d02bd537e7f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 593.16666793823242,
+            "y": 454.02604675292969
+          },
+          "nodeIndex": "DimTiempo",
+          "nodeLineageTag": "9710fb8f-37cf-4f74-b03b-cf3c23feb2fa",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 205.68502509266213,
+            "y": 720.98216551317091
+          },
+          "nodeIndex": "DimGrupoRubrosComercios",
+          "nodeLineageTag": "7f583f63-34c3-42a6-93d3-1396d89ff1ee",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 4
+        }
+      ],
+      "name": "Disposición 1",
+      "zoomValue": 63.528824378130267,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 3,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 545.16666793823242,
+            "y": 27.026046752929688
+          },
+          "nodeIndex": "DimComercios",
+          "nodeLineageTag": "7d2cbef3-1f59-4cc5-a036-5d02bd537e7f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 101.16666793823242,
+            "y": 93.026046752929688
+          },
+          "nodeIndex": "Rubros_2",
+          "nodeLineageTag": "e816f66a-e301-4d4b-9430-5a783a151797",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 2",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 4,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 467.16666793823242,
+            "y": -12.973953247070313
+          },
+          "nodeIndex": "DimGrupoRubrosComercios",
+          "nodeLineageTag": "7f583f63-34c3-42a6-93d3-1396d89ff1ee",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 651.16666793823242,
+            "y": 275.02604675292969
+          },
+          "nodeIndex": "Rubros_2",
+          "nodeLineageTag": "e816f66a-e301-4d4b-9430-5a783a151797",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 133.16666793823242,
+            "y": 59.026046752929688
+          },
+          "nodeIndex": "DimComerciosReactivados",
+          "nodeLineageTag": "7215a4d4-da96-49c2-9199-be9f2d35fc8d",
+          "size": {
+            "height": 202,
+            "width": 281
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 308.16666793823242,
+            "y": 336.02604675292969
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "nodeLineageTag": "71b37b55-3971-432f-aad9-63142e7c7f5c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 3",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 5,
+      "scrollPosition": {
+        "x": 0,
+        "y": 40.026046752929688
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 568.16666793823242,
+            "y": 374.859375
+          },
+          "nodeIndex": "DimComerciosReactivados",
+          "nodeLineageTag": "7215a4d4-da96-49c2-9199-be9f2d35fc8d",
+          "size": {
+            "height": 279,
+            "width": 323
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "DimTiempo",
+          "nodeLineageTag": "9710fb8f-37cf-4f74-b03b-cf3c23feb2fa",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 917.16666793823242,
+            "y": 25.026046752929688
+          },
+          "nodeIndex": "DimComercios",
+          "nodeLineageTag": "7d2cbef3-1f59-4cc5-a036-5d02bd537e7f",
+          "size": {
+            "height": 449,
+            "width": 414
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 114.16666793823242,
+            "y": 393.02604675292969
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "nodeLineageTag": "71b37b55-3971-432f-aad9-63142e7c7f5c",
+          "size": {
+            "height": 327,
+            "width": 305
+          },
+          "zIndex": 1
+        }
+      ],
+      "name": "Disposición 4",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 6,
+      "scrollPosition": {
+        "x": 0,
+        "y": 113
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 64,
+            "y": 15
+          },
+          "nodeIndex": "DimComercios",
+          "nodeLineageTag": "7d2cbef3-1f59-4cc5-a036-5d02bd537e7f",
+          "size": {
+            "height": 472,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 362,
+            "y": 436
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "nodeLineageTag": "71b37b55-3971-432f-aad9-63142e7c7f5c",
+          "size": {
+            "height": 509,
+            "width": 315
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 834,
+            "y": 430
+          },
+          "nodeIndex": "DimComerciosReactivados",
+          "nodeLineageTag": "7215a4d4-da96-49c2-9199-be9f2d35fc8d",
+          "size": {
+            "height": 538,
+            "width": 330
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 637,
+            "y": 0
+          },
+          "nodeIndex": "DimTiempo",
+          "nodeLineageTag": "9710fb8f-37cf-4f74-b03b-cf3c23feb2fa",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1005,
+            "y": 0
+          },
+          "nodeIndex": "DimTiempo (2)",
+          "nodeLineageTag": "e81f28a2-b0cc-40f6-9f75-1352b400e109",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 5",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 7,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 414,
+            "y": 0
+          },
+          "nodeIndex": "DimComerciosReactivados",
+          "nodeLineageTag": "7215a4d4-da96-49c2-9199-be9f2d35fc8d",
+          "size": {
+            "height": 320,
+            "width": 353
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 10,
+            "y": 107
+          },
+          "nodeIndex": "Operaciones DimEntidades",
+          "nodeLineageTag": "d8cd50c0-7cff-4862-9715-23033541e243",
+          "size": {
+            "height": 277,
+            "width": 278
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 919,
+            "y": 142
+          },
+          "nodeIndex": "PersonaUnica DimPersonas",
+          "nodeLineageTag": "4147b548-1a45-4cd8-924e-502e706d4511",
+          "size": {
+            "height": 186,
+            "width": 293
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 436,
+            "y": 447
+          },
+          "nodeIndex": "Operaciones DimComerciosRubrosComercios",
+          "nodeLineageTag": "4d1c9899-8db5-463c-935f-cf2b7a1b35a7",
+          "size": {
+            "height": 206,
+            "width": 394
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 939,
+            "y": 484
+          },
+          "nodeIndex": "DimGrupoRubrosComercios",
+          "nodeLineageTag": "7f583f63-34c3-42a6-93d3-1396d89ff1ee",
+          "size": {
+            "height": 145,
+            "width": 273
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 39,
+            "y": 459
+          },
+          "nodeIndex": "Operaciones DimRubrosComercios",
+          "nodeLineageTag": "fe050500-85df-467f-bc8e-1388ef487cdb",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 6",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 8,
+      "scrollPosition": {
+        "x": 0,
+        "y": 481
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1138,
+            "y": 0
+          },
+          "nodeIndex": "DimComercios",
+          "nodeLineageTag": "7d2cbef3-1f59-4cc5-a036-5d02bd537e7f",
+          "size": {
+            "height": 460,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 197
+          },
+          "nodeIndex": "PersonaUnica DimPersonas",
+          "nodeLineageTag": "4147b548-1a45-4cd8-924e-502e706d4511",
+          "size": {
+            "height": 340,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 329,
+            "y": 0
+          },
+          "nodeIndex": "DimComerciosReactivados",
+          "nodeLineageTag": "7215a4d4-da96-49c2-9199-be9f2d35fc8d",
+          "size": {
+            "height": 296,
+            "width": 325
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 389,
+            "y": 614
+          },
+          "nodeIndex": "Operaciones DimRubrosComercios",
+          "nodeLineageTag": "fe050500-85df-467f-bc8e-1388ef487cdb",
+          "size": {
+            "height": 224,
+            "width": 359
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1220,
+            "y": 470
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "nodeLineageTag": "71b37b55-3971-432f-aad9-63142e7c7f5c",
+          "size": {
+            "height": 300,
+            "width": 348
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 48,
+            "y": 572
+          },
+          "nodeIndex": "Operaciones DimComerciosRubrosComercios",
+          "nodeLineageTag": "4d1c9899-8db5-463c-935f-cf2b7a1b35a7",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 938,
+            "y": 677
+          },
+          "nodeIndex": "DimProvincia",
+          "nodeLineageTag": "db136681-a924-4ee6-9f73-22a133b86bf2",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 852,
+            "y": 52
+          },
+          "nodeIndex": "DimComercios_Unicos",
+          "nodeLineageTag": "7034fa33-6f2e-4e98-9f54-b6148f03b0a8",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 667,
+            "y": 863
+          },
+          "nodeIndex": "Operaciones DimEntidades",
+          "nodeLineageTag": "d8cd50c0-7cff-4862-9715-23033541e243",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1072,
+            "y": 888
+          },
+          "nodeIndex": "DimProvincia 2",
+          "nodeLineageTag": "aab9f03e-b04b-4cbb-9d92-02dd6646d4d2",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 7",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 9,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": -35,
+            "y": -26
+          },
+          "nodeIndex": "DimCampañas",
+          "nodeLineageTag": "ad7da84e-3b91-4140-9b09-dcafa15c2028",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 627,
+            "y": 41
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "nodeLineageTag": "71b37b55-3971-432f-aad9-63142e7c7f5c",
+          "size": {
+            "height": 465,
+            "width": 438
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 129,
+            "y": 333
+          },
+          "nodeIndex": "Rubros_2",
+          "nodeLineageTag": "e816f66a-e301-4d4b-9430-5a783a151797",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 2
+        }
+      ],
+      "name": "Disposición 8",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 10,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 453,
+            "y": 338
+          },
+          "nodeIndex": "DimCampañas",
+          "nodeLineageTag": "ad7da84e-3b91-4140-9b09-dcafa15c2028",
+          "size": {
+            "height": 389,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 26,
+            "y": 229
+          },
+          "nodeIndex": "Campañas_reintegros",
+          "nodeLineageTag": "7dca921f-1414-4141-86bb-b3d72febc4d0",
+          "size": {
+            "height": 359,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 882,
+            "y": 0
+          },
+          "nodeIndex": "DimComercios",
+          "nodeLineageTag": "7d2cbef3-1f59-4cc5-a036-5d02bd537e7f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 390,
+            "y": 0
+          },
+          "nodeIndex": "DimProvincia",
+          "nodeLineageTag": "db136681-a924-4ee6-9f73-22a133b86bf2",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 802,
+            "y": 426
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "nodeLineageTag": "71b37b55-3971-432f-aad9-63142e7c7f5c",
+          "size": {
+            "height": 300,
+            "width": 315
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 9",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 11,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 841,
+            "y": 7
+          },
+          "nodeIndex": "DimTiempo",
+          "nodeLineageTag": "9710fb8f-37cf-4f74-b03b-cf3c23feb2fa",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 482,
+            "y": 0
+          },
+          "nodeIndex": "Operaciones DimEntidades",
+          "nodeLineageTag": "d8cd50c0-7cff-4862-9715-23033541e243",
+          "size": {
+            "height": 272,
+            "width": 285
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 822,
+            "y": 442
+          },
+          "nodeIndex": "Operaciones DimFormaPagos",
+          "nodeLineageTag": "97dcc5f7-3b7e-42bf-8345-33a21d2e38f0",
+          "size": {
+            "height": 200,
+            "width": 296
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 11,
+            "y": 26
+          },
+          "nodeIndex": "DimCampañas",
+          "nodeLineageTag": "ad7da84e-3b91-4140-9b09-dcafa15c2028",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 472.15927566919561,
+            "y": 410.86015025968624
+          },
+          "nodeIndex": "PBI uvFactCampañasMensualPorRubro",
+          "nodeLineageTag": "d5494353-9f2a-49a9-a996-862a5aa242ac",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 37,
+            "y": 380
+          },
+          "nodeIndex": "Operaciones DimRubrosComercios",
+          "nodeLineageTag": "fe050500-85df-467f-bc8e-1388ef487cdb",
+          "size": {
+            "height": 224,
+            "width": 316.91324214941818
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1289.4301051628465,
+            "y": 110.2117453313206
+          },
+          "nodeIndex": "DimProvincia",
+          "nodeLineageTag": "db136681-a924-4ee6-9f73-22a133b86bf2",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1310.5097429974444,
+            "y": 336.46652475600405
+          },
+          "nodeIndex": "DimProvincia 2",
+          "nodeLineageTag": "aab9f03e-b04b-4cbb-9d92-02dd6646d4d2",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 10",
+      "zoomValue": 71.15871780007825,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 12,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 850.16666793823242,
+            "y": 43.026046752929688
+          },
+          "nodeIndex": "TODO",
+          "nodeLineageTag": "20de5cf1-7b7b-490d-8183-da4f27046b6e",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 505.16666793823242,
+            "y": 214.02604675292969
+          },
+          "nodeIndex": "CFT",
+          "nodeLineageTag": "8cafaf87-a879-4236-8db5-efa41bf05356",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 147.16666793823242,
+            "y": 124.02604675292969
+          },
+          "nodeIndex": "CFT - MES",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 507.16666793823242,
+            "y": -27.973953247070313
+          },
+          "nodeIndex": "CFT - CUOTAS",
+          "nodeLineageTag": "243cb5aa-798a-41d5-9e3b-2d25bfb6e6cb",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 11",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 13,
+      "scrollPosition": {
+        "x": 1,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 148,
+            "y": 270
+          },
+          "nodeIndex": "DimComerciosReactivados",
+          "nodeLineageTag": "7215a4d4-da96-49c2-9199-be9f2d35fc8d",
+          "size": {
+            "height": 422,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 918,
+            "y": 244
+          },
+          "nodeIndex": "Operaciones DimRubrosComercios",
+          "nodeLineageTag": "fe050500-85df-467f-bc8e-1388ef487cdb",
+          "size": {
+            "height": 356,
+            "width": 326
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 714,
+            "y": 59
+          },
+          "nodeIndex": "DimGrupoRubrosComercios",
+          "nodeLineageTag": "7f583f63-34c3-42a6-93d3-1396d89ff1ee",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 437,
+            "y": 4
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "nodeLineageTag": "71b37b55-3971-432f-aad9-63142e7c7f5c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 12",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 14,
+      "scrollPosition": {
+        "x": 0,
+        "y": 530
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 499,
+            "y": 0
+          },
+          "nodeIndex": "DimComerciosReactivados",
+          "nodeLineageTag": "7215a4d4-da96-49c2-9199-be9f2d35fc8d",
+          "size": {
+            "height": 380,
+            "width": 321
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 68,
+            "y": 0
+          },
+          "nodeIndex": "DimTiempo",
+          "nodeLineageTag": "9710fb8f-37cf-4f74-b03b-cf3c23feb2fa",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 993,
+            "y": 476
+          },
+          "nodeIndex": "DimTiempo (2)",
+          "nodeLineageTag": "e81f28a2-b0cc-40f6-9f75-1352b400e109",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 78,
+            "y": 834
+          },
+          "nodeIndex": "DimComercios",
+          "nodeLineageTag": "7d2cbef3-1f59-4cc5-a036-5d02bd537e7f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 486,
+            "y": 1056
+          },
+          "nodeIndex": "DimProvincia",
+          "nodeLineageTag": "db136681-a924-4ee6-9f73-22a133b86bf2",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 436,
+            "y": 465
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "nodeLineageTag": "71b37b55-3971-432f-aad9-63142e7c7f5c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": -75,
+            "y": 473
+          },
+          "nodeIndex": "PersonaUnica DimPersonas",
+          "nodeLineageTag": "4147b548-1a45-4cd8-924e-502e706d4511",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 13",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 15,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 588,
+            "y": 0
+          },
+          "nodeIndex": "DimComercios",
+          "nodeLineageTag": "7d2cbef3-1f59-4cc5-a036-5d02bd537e7f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 865,
+            "y": 126
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "nodeLineageTag": "71b37b55-3971-432f-aad9-63142e7c7f5c",
+          "size": {
+            "height": 526,
+            "width": 289
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 192,
+            "y": 402
+          },
+          "nodeIndex": "Operaciones DimEntidades",
+          "nodeLineageTag": "d8cd50c0-7cff-4862-9715-23033541e243",
+          "size": {
+            "height": 272,
+            "width": 319
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 268,
+            "y": 27
+          },
+          "nodeIndex": "DimProvincia 2",
+          "nodeLineageTag": "aab9f03e-b04b-4cbb-9d92-02dd6646d4d2",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 14",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 16,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 513.16666793823242,
+            "y": 428
+          },
+          "nodeIndex": "DimComerciosReactivados",
+          "nodeLineageTag": "7215a4d4-da96-49c2-9199-be9f2d35fc8d",
+          "size": {
+            "height": 438,
+            "width": 365
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 1.84375
+          },
+          "nodeIndex": "DimTiempo (2)",
+          "nodeLineageTag": "e81f28a2-b0cc-40f6-9f75-1352b400e109",
+          "size": {
+            "height": 679,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 573.16666793823242,
+            "y": 0
+          },
+          "nodeIndex": "DimComercios",
+          "nodeLineageTag": "7d2cbef3-1f59-4cc5-a036-5d02bd537e7f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1027.1666679382324,
+            "y": 192.02604675292969
+          },
+          "nodeIndex": "Operaciones DimEntidades",
+          "nodeLineageTag": "d8cd50c0-7cff-4862-9715-23033541e243",
+          "size": {
+            "height": 310,
+            "width": 316
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 15",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 17,
+      "scrollPosition": {
+        "x": 0,
+        "y": 25.833332061767578
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 724.16666793823242,
+            "y": 0
+          },
+          "nodeIndex": "Operaciones DimEntidades",
+          "nodeLineageTag": "d8cd50c0-7cff-4862-9715-23033541e243",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 369.16666793823242,
+            "y": 278.85937881469727
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "nodeLineageTag": "71b37b55-3971-432f-aad9-63142e7c7f5c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "DimProvincia",
+          "nodeLineageTag": "db136681-a924-4ee6-9f73-22a133b86bf2",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 266.02604675292969
+          },
+          "nodeIndex": "DimComercios",
+          "nodeLineageTag": "7d2cbef3-1f59-4cc5-a036-5d02bd537e7f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 682.16666793823242,
+            "y": 329.85937881469727
+          },
+          "nodeIndex": "DimEstadoTransacciones",
+          "nodeLineageTag": "4ab8ceeb-40e1-40d0-819e-2565f1cec9ce",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 16",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 18,
+      "scrollPosition": {
+        "x": 0,
+        "y": 134.39999389648438
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 217.02604675292969
+          },
+          "nodeIndex": "FactTransaccionesComercios",
+          "nodeLineageTag": "71b37b55-3971-432f-aad9-63142e7c7f5c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 939.16666793823242,
+            "y": 184.02604675292969
+          },
+          "nodeIndex": "Operaciones DimRubrosComercios",
+          "nodeLineageTag": "fe050500-85df-467f-bc8e-1388ef487cdb",
+          "size": {
+            "height": 224,
+            "width": 291
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 412.16666793823242,
+            "y": 87
+          },
+          "nodeIndex": "DimComercios",
+          "nodeLineageTag": "7d2cbef3-1f59-4cc5-a036-5d02bd537e7f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 588,
+            "y": 449
+          },
+          "nodeIndex": "DimTiempo (2)",
+          "nodeLineageTag": "e81f28a2-b0cc-40f6-9f75-1352b400e109",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 980,
+            "y": 0
+          },
+          "nodeIndex": "DimProvincia",
+          "nodeLineageTag": "db136681-a924-4ee6-9f73-22a133b86bf2",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 247,
+            "y": 436
+          },
+          "nodeIndex": "DimComercios_Unicos",
+          "nodeLineageTag": "7034fa33-6f2e-4e98-9f54-b6148f03b0a8",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Disposición 17",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas las tablas",
+  "defaultDiagram": "Todas las tablas"
+}

@@ -1,0 +1,1351 @@
+table Medidas
+	lineageTag: 58ff2982-64c2-4d06-834a-b055bae093a6
+
+	measure 'Comercios Monto Bruto' = sum(FactTransaccionesComercios[MontoBruto])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Comercios
+		lineageTag: 3389696b-7859-4267-b72c-20a20016eee7
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-US"}
+
+	measure 'Comercios Monto Bruto mes ant' =
+			
+			CALCULATE(
+			    [Comercios Monto Bruto],
+			    DATEADD('DimTiempo'[Fecha], -1, MONTH)
+			)
+		formatString: \$#,0.0;(\$#,0.0);\$#,0.0
+		displayFolder: Comercios
+		lineageTag: 737aaddd-d96e-4ba1-8dd9-037492ba09b3
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-US"}
+
+	measure 'Comercios Trx' = sum(FactTransaccionesComercios[CantidadTxt])
+		displayFolder: Comercios
+		lineageTag: bfac2361-a7af-4c98-b7df-309ba1f2157a
+
+		formatStringDefinition = ```
+				VAR Valor = SELECTEDMEASURE()
+				VAR Escala = DIVIDE(Valor, 1000) 
+				-- Verificamos si al dividir por 1000 nos da exacto (sin residuo decimal)
+				VAR EsRedondo = MOD(Escala, 1) = 0 
+				
+				RETURN
+				SWITCH(
+				    TRUE(),
+				    
+				    -- Si es menor a 1000, mostramos número entero normal sin K
+				    ABS(Valor) < 1000, "# ##0",
+				    
+				    -- Si es mayor a 1000 Y es redondo (Ej: 2000), usamos una coma para escalar pero SIN .0
+				    EsRedondo, "# ##0, ""K""",
+				    
+				    -- Si es mayor a 1000 Y tiene decimales (Ej: 2500), usamos una coma para escalar Y el .0
+				    "# ##0,.0 ""K"""
+				)
+				```
+
+	measure 'Comercios Trx mes ant' =
+			
+			CALCULATE(
+			    [TRX SIN FORMATO],
+			    DATEADD('DimTiempo'[Fecha], -1, MONTH)
+			)
+		formatString: #,0
+		displayFolder: Comercios
+		lineageTag: ee7283f6-978f-4f68-92fd-eba7c0318436
+
+	measure 'Comercios Ticket Promedio' =
+			
+			DIVIDE (
+			[Comercios Monto Bruto],
+			[Comercios Trx],
+			    0
+			)
+		formatString: \$#,0.0;(\$#,0.0);\$#,0.0
+		displayFolder: Comercios
+		lineageTag: d0644a9f-7430-4bc9-98d9-ea26c078e6c7
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-US"}
+
+	measure 'Comercios Ticket Promedio mes ant' =
+			
+			CALCULATE(
+			    [Comercios Ticket Promedio],
+			    DATEADD('DimTiempo'[Fecha], -1, MONTH)
+			)
+		formatString: \$#,0.0;(\$#,0.0);\$#,0.0
+		displayFolder: Comercios
+		lineageTag: dd908369-bce9-4544-834d-87ac640ec7a0
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-US"}
+
+	measure 'Comercios Cantidad Clientes' = sum(FactTransaccionesComercios[CantidadClientes])
+		formatString: #,0
+		displayFolder: Comercios
+		lineageTag: 00be50bc-1edd-4fc2-83ea-9dca2a17ddd0
+
+	measure 'Comercios Trx %MoM' = ```
+			
+			VAR Actual = [Comercios Trx]
+			VAR Anterior = [Comercios Trx mes ant]
+			RETURN
+			IF(
+			    NOT ISBLANK(Anterior),
+			    DIVIDE(Actual - Anterior, Anterior),
+			    BLANK()
+			)
+			
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Comercios
+		lineageTag: 5103bc82-b187-491c-a96a-dbb09129e6f7
+
+	measure 'Cantidad Comercios' = ```
+			DISTINCTCOUNT(DimComercios[ComercioID]) 
+			```
+		formatString: #,0
+		displayFolder: Comercios
+		lineageTag: 9be2ece7-33a8-485e-a0b8-2c1bec39f113
+
+	measure 'Cantidad Comercios activos' = ```
+			
+			CALCULATE([Cantidad Comercios],DimComercios[Columna_Reactivada] = "Comercio Activo")
+			
+			```
+		formatString: #,0
+		displayFolder: Comercios
+		lineageTag: 7d7c840e-cb2e-4fa1-a59f-079b28ea06b2
+
+	measure 'Cantidad Comercios habilitados' =
+			
+			CALCULATE([Cantidad Comercios],DimComercios[Habilitado] = "Si")
+		formatString: #,0
+		displayFolder: Comercios
+		lineageTag: a2f5e9bb-f913-464a-9dfb-44c7b9137dbb
+
+	measure 'Cantidad Comercios reactivados' =
+			
+			CALCULATE([Cantidad Comercios],DimComercios[Columna_Reactivada] = "Comercio Reactivado")
+		formatString: 0
+		displayFolder: Comercios
+		lineageTag: d6c19d88-f9a8-43d6-9093-40b64ca13cc5
+
+	measure 'Cantidad Comercios nuevos' = ```
+			
+			CALCULATE([Cantidad Comercios],DimComerciosReactivados[Flag_Reactivado] = "Comercio Nuevo")
+			
+			```
+		formatString: #,0
+		displayFolder: Comercios
+		lineageTag: beb35e69-97f6-4506-a7a3-aea62af66ae8
+
+	measure 'Cantidad Comercios mes ant' =
+			
+			CALCULATE(
+			    [Cantidad Comercios],
+			    DATEADD('DimTiempo'[Fecha], -1, MONTH)
+			)
+		formatString: 0
+		displayFolder: Comercios
+		lineageTag: a55d7fbb-5af5-4c15-8342-b7a490ce3a68
+
+	measure 'Cantidad Comercios %MoM' = ```
+			
+			VAR Actual = [Cantidad Comercios]
+			VAR Anterior = [Cantidad Comercios mes ant]
+			RETURN
+			IF(
+			    NOT ISBLANK(Anterior),
+			    DIVIDE(Actual - Anterior, Anterior),
+			    BLANK()
+			)
+			
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Comercios
+		lineageTag: f1e25132-93dd-42ba-a6e7-aed3b4a2d429
+
+	measure 'Cantidad Comercios reactivados mes ant' =
+			
+			CALCULATE(
+			    [Comercios Reactivados 1],
+			    DATEADD('DimTiempo (2)'[Fecha], -1, MONTH)
+			)
+		formatString: 0
+		displayFolder: Comercios
+		lineageTag: bc04cd52-1b07-438f-b505-f54e2dcaa96c
+
+	measure 'Cantidad Comercios reactivados %MoM' =
+			
+			VAR Actual = [Comercios Reactivados 1]
+			VAR Anterior = [Cantidad Comercios reactivados mes ant]
+			RETURN
+			IF(
+			    NOT ISBLANK(Anterior),
+			    DIVIDE(Actual - Anterior, Anterior),
+			    BLANK()
+			)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		displayFolder: Comercios
+		lineageTag: 48992e25-9832-4e7a-9b4f-e58b9f6ef8fa
+
+	measure 'Cantidad Comercios nuevos mes ant' =
+			
+			CALCULATE(
+			    [Cantidad Comercios nuevos],
+			    DATEADD('DimTiempo'[Fecha], -1, MONTH)
+			)
+		formatString: 0
+		displayFolder: Comercios
+		lineageTag: 9e1aeffd-319b-43c3-8f88-6bcbe03c0f7f
+
+	measure 'Cantidad Comercios nuevos %MoM' = ```
+			
+			VAR Actual = [Cantidad Comercios nuevos]
+			VAR Anterior = [Cantidad Comercios nuevos mes ant]
+			RETURN
+			IF(
+			    NOT ISBLANK(Anterior),
+			    DIVIDE(Actual - Anterior, Anterior),
+			    BLANK()
+			)
+			
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Comercios
+		lineageTag: 8907acc5-249f-4741-ac68-614eca071221
+
+	measure 'Comercios Monto Bruto %MoM' =
+			
+			VAR Actual = [Comercios Monto Bruto]
+			VAR Anterior = [Comercios Monto Bruto mes ant]
+			RETURN
+			IF(
+			    NOT ISBLANK(Anterior),
+			    DIVIDE(Actual - Anterior, Anterior),
+			    BLANK()
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Comercios
+		lineageTag: 15427f99-e82d-4202-a2c9-c3ba9cd8992a
+
+	measure 'Comercios Ticket Promedio %MoM' =
+			
+			VAR Actual = [Comercios Ticket Promedio]
+			VAR Anterior = [Comercios Ticket Promedio mes ant]
+			RETURN
+			IF(
+			    NOT ISBLANK(Anterior),
+			    DIVIDE(Actual - Anterior, Anterior),
+			    BLANK()
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Comercios
+		lineageTag: c53be0d1-d70d-46cd-b511-96ec1cf61747
+
+	measure 'Cantidad Comercios activos mes ant' =
+			
+			CALCULATE(
+			    [Comercios Activos 1],
+			    DATEADD('DimTiempo'[Fecha], -1, MONTH)
+			)
+		formatString: #,0
+		displayFolder: Comercios
+		lineageTag: 68dcd17e-4047-4269-aefd-3f5c3b3b095e
+
+	measure 'Cantidad Comercios activos %MoM' =
+			
+			VAR Actual = [Comercios Activos 1]
+			VAR Anterior = [Cantidad Comercios activos mes ant]
+			RETURN
+			IF(
+			    NOT ISBLANK(Anterior),
+			    DIVIDE(Actual - Anterior, Anterior),
+			    BLANK()
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Comercios
+		lineageTag: 93043b6e-166d-4cac-9006-5fbeadc5cedd
+
+	measure 'Cantidad Comercios nuevos %MoM label' =
+			
+			VAR Variacion = [Cantidad Comercios nuevos %MoM]
+			VAR Flecha =
+			    IF(
+			        Variacion > 0,
+			        "▲",
+			        IF(Variacion < 0, "▼", "•")
+			    )
+			VAR Porcentaje =
+			    FORMAT(ABS(Variacion), "0.0%")
+			RETURN
+			Flecha & " " & Porcentaje
+		displayFolder: Comercios - Label & Color
+		lineageTag: b523a058-3dbe-41cc-b5eb-76b73cae719e
+
+	measure 'Cantidad Comercios nuevos %MoM color' =
+			
+			SWITCH(
+			    TRUE(),
+			[Cantidad Comercios nuevos %MoM] > 0, "#00B050",   -- Verde
+			    [Cantidad Comercios nuevos %MoM] < 0, "#FF0000",   -- Rojo
+			    "#808080"                         -- Gris neutro si es 0 o sin valor
+			)
+		displayFolder: Comercios - Label & Color
+		lineageTag: ddf0ed10-ff27-48f2-ad75-b2bd0e2a9fa8
+
+	measure 'Cantidad Comercios reactivados %MoM color' =
+			
+			SWITCH(
+			    TRUE(),
+			[Cantidad Comercios reactivados %MoM]> 0, "#00B050",   -- Verde
+			    [Cantidad Comercios reactivados %MoM] < 0, "#FF0000",   -- Rojo
+			    "#808080"                         -- Gris neutro si es 0 o sin valor
+			)
+		displayFolder: Comercios - Label & Color
+		lineageTag: 89cf7ace-fce6-4c51-8bc2-5d591f1d623f
+
+	measure 'Cantidad Comercios reactivados %MoM label' = ```
+			
+			VAR Variacion = [Cantidad Comercios reactivados %MoM]
+			VAR Flecha =
+			    IF(
+			        Variacion > 0,
+			        "▲",
+			        IF(Variacion < 0, "▼", "•")
+			    )
+			VAR Porcentaje =
+			    FORMAT(ABS(Variacion), "0.0%")
+			RETURN
+			Flecha & " " & Porcentaje
+			
+			```
+		displayFolder: Comercios - Label & Color
+		lineageTag: 1730569b-0366-4f73-b638-bc0eeed23c2d
+
+	measure 'Cantidad Comercios activos %MoM color' =
+			
+			SWITCH(
+			    TRUE(),
+			[Cantidad Comercios activos %MoM] > 0, "#00B050",   -- Verde
+			[Cantidad Comercios activos %MoM] < 0, "#FF0000",   -- Rojo
+			    "#808080"                         -- Gris neutro si es 0 o sin valor
+			)
+		displayFolder: Comercios - Label & Color
+		lineageTag: 1c010873-bb66-4a9e-b1e2-b2e41093e4cf
+
+	measure 'Cantidad Comercios activos %MoM label' = ```
+			
+			VAR Variacion = [Cantidad Comercios activos %MoM]
+			VAR Flecha =
+			    IF(
+			        Variacion > 0,
+			        "▲",
+			        IF(Variacion < 0, "▼", "•")
+			    )
+			VAR Porcentaje =
+			    FORMAT(ABS(Variacion), "0.0%")
+			RETURN
+			Flecha & " " & Porcentaje
+			
+			```
+		displayFolder: Comercios - Label & Color
+		lineageTag: b58a043b-8022-4901-a610-1952c05e32e5
+
+	measure 'Comercios Trx %MoM label' =
+			
+			VAR Variacion = [Comercios Trx %MoM]
+			VAR Flecha =
+			    IF(
+			        Variacion > 0,
+			        "▲",
+			        IF(Variacion < 0, "▼", "•")
+			    )
+			VAR Porcentaje =
+			    FORMAT(ABS(Variacion), "0.0%")
+			RETURN
+			Flecha & " " & Porcentaje
+		displayFolder: Comercios - Label & Color
+		lineageTag: 0adfc2ff-4305-4eb3-920e-ada5a695425e
+
+	measure 'Comercios Trx %MoM color' =
+			
+			SWITCH(
+			    TRUE(),
+			[Comercios Trx %MoM] > 0, "#00B050",   -- Verde
+			[Comercios Trx %MoM] < 0, "#FF0000",   -- Rojo
+			    "#808080"                         -- Gris neutro si es 0 o sin valor
+			)
+		displayFolder: Comercios - Label & Color
+		lineageTag: dbc4d15c-4c9f-422e-a025-e861c448832d
+
+	measure 'Comercios Monto Bruto %MoM label' =
+			
+			VAR Variacion = [Comercios Monto Bruto %MoM]
+			VAR Flecha =
+			    IF(
+			        Variacion > 0,
+			        "▲",
+			        IF(Variacion < 0, "▼", "•")
+			    )
+			VAR Porcentaje =
+			    FORMAT(ABS(Variacion), "0.0%")
+			RETURN
+			Flecha & " " & Porcentaje
+		displayFolder: Comercios - Label & Color
+		lineageTag: eda9bfad-9684-4707-8424-6658548c3571
+
+	measure 'Comercios Monto Bruto %MoM color' =
+			
+			SWITCH(
+			    TRUE(),
+			[Comercios Monto Bruto %MoM] > 0, "#00B050",   -- Verde
+			[Comercios Monto Bruto %MoM] < 0, "#FF0000",   -- Rojo
+			    "#808080"                         -- Gris neutro si es 0 o sin valor
+			)
+		displayFolder: Comercios - Label & Color
+		lineageTag: cfb3fa2f-b4c1-41eb-9ac7-03736b09a539
+
+	measure 'Comercios Ticket Promedio %MoM label' =
+			
+			VAR Variacion = [Comercios Ticket Promedio %MoM]
+			VAR Flecha =
+			    IF(
+			        Variacion > 0,
+			        "▲",
+			        IF(Variacion < 0, "▼", "•")
+			    )
+			VAR Porcentaje =
+			    FORMAT(ABS(Variacion), "0.0%")
+			RETURN
+			Flecha & " " & Porcentaje
+		displayFolder: Comercios - Label & Color
+		lineageTag: 12e0814e-2994-43a8-8709-14b760f7bb2b
+
+	measure 'Comercios Ticket Promedio %MoM color' =
+			
+			SWITCH(
+			    TRUE(),
+			[Comercios Ticket Promedio %MoM] > 0, "#00B050",   -- Verde
+			[Comercios Ticket Promedio %MoM] < 0, "#FF0000",   -- Rojo
+			    "#808080"                         -- Gris neutro si es 0 o sin valor
+			)
+		displayFolder: Comercios - Label & Color
+		lineageTag: 951bdf8d-33ba-4ea9-a6d9-23e6e2404d25
+
+	measure 'Comercios Monto Bruto formateado' = ```
+			
+			
+			VAR Valor = [Comercios Monto Bruto]  -- tu medida base
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ABS(Valor) >= 1000000000, FORMAT(Valor / 1000000000, "$# ##0.00") & " MM",
+			    ABS(Valor) >= 1000000,    FORMAT(Valor / 1000000, "$# ##0.00") & " M",
+			    FORMAT(Valor, "$# ##0")
+			)
+			
+			```
+		displayFolder: Formato MM - K
+		lineageTag: 45a14888-6a17-4c55-8b48-4b024918ee92
+
+	measure 'Comercios Ticket Promedio formateado' = ```
+			
+			
+			VAR Valor = [Comercios Ticket Promedio]  -- reemplazá por tu medida base
+			VAR Escala =
+			    SWITCH(
+			        TRUE(),
+			        ABS(Valor) >= 1000, Valor / 1000,
+			        Valor
+			    )
+			VAR Sufijo =
+			    SWITCH(
+			        TRUE(),
+			        ABS(Valor) >= 1000, " K",
+			        ""
+			    )
+			RETURN
+			IF(
+			    MOD(Escala,1) = 0,
+			    FORMAT(Escala, "$# ##0") & Sufijo,
+			    FORMAT(Escala, "$# ##0.0") & Sufijo
+			)
+			
+			```
+		displayFolder: Formato MM - K
+		lineageTag: f964f1bb-0c14-4369-96f6-abd6f2c1e1fb
+
+	measure 'Comercios Trx formateado' = ```
+			
+			
+			VAR Valor = [Comercios Trx]  -- reemplazá por tu medida base
+			VAR Escala =
+			    SWITCH(
+			        TRUE(),
+			        ABS(Valor) >= 1000, Valor / 1000,
+			        Valor
+			    )
+			VAR Sufijo =
+			    SWITCH(
+			        TRUE(),
+			        ABS(Valor) >= 1000, " K",
+			        ""
+			    )
+			RETURN
+			IF(
+			    MOD(Escala,1) = 0,
+			    FORMAT(Escala, "# ##0") & Sufijo,
+			    FORMAT(Escala, "# ##0.0") & Sufijo
+			)
+			
+			```
+		displayFolder: Formato MM - K
+		lineageTag: e1c7be91-bab0-40ad-af00-221d6136e767
+
+	measure 'Comercios Ticket Promedio formateado $ K' =
+			
+			VAR Valor = [Comercios Ticket Promedio]  -- reemplazá por tu medida base
+			VAR Escala =
+			    SWITCH(
+			        TRUE(),
+			        ABS(Valor) >= 1000, Valor / 1000,
+			        Valor
+			    )
+			VAR Sufijo =
+			    SWITCH(
+			        TRUE(),
+			        ABS(Valor) >= 1000, " K",
+			        ""
+			    )
+			RETURN
+			IF(
+			    MOD(Escala,1) = 0,
+			    FORMAT(Escala, "$# ##0") & Sufijo,
+			    FORMAT(Escala, "$# ##0.0") & Sufijo
+			)
+		displayFolder: Formato MM - K
+		lineageTag: f957931f-001c-45e9-95b6-12df15916fb3
+
+	measure 'Comercios Reactivados 1' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(DimComerciosReactivados[ComercioEcosistemaID]) ,
+			    DimComerciosReactivados[FlagReactivadoAñoFiscal2026] = "Comercio Reactivado" 
+			)
+			
+			
+			
+			
+			```
+		formatString: 0
+		lineageTag: 44fd30a2-edcc-4bb4-8251-f93c4704b79e
+
+	measure 'Comercios Activos 1' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(FactTransaccionesComercios[ComercioID])
+			    
+			    
+			    /*,
+			    USERELATIONSHIP(DimTiempo[Fecha] , DimComerciosReactivados[FechaPrimeraTransaccion_Date])
+			)*/)
+			```
+		formatString: #,0
+		lineageTag: 9de4540d-9a7b-4981-9e44-62a478472537
+
+	measure 'Count Comercios' = DISTINCTCOUNT(FactTransaccionesComercios[ComercioID])
+		formatString: #,0
+		lineageTag: 0fed4cce-4d23-4e9c-89b8-b3feb903ce5b
+
+	measure 'Cantidad Comercios habilitados mes ant' =
+			
+			CALCULATE(
+			    [Cantidad Comercios habilitados],
+			    DATEADD('DimTiempo'[Fecha], -1, MONTH)
+			)
+		formatString: 0
+		lineageTag: e7910416-6fd0-4b3f-af81-c02ac5e18da4
+
+	measure 'Cantidad Comercios habilitados %MoM' = ```
+			
+			VAR Actual = [Cantidad Comercios habilitados]
+			VAR Anterior = [Cantidad Comercios habilitados mes ant]
+			RETURN
+			IF(
+			    NOT ISBLANK(Anterior),
+			    DIVIDE(Actual - Anterior, Anterior),
+			    BLANK()
+			)
+			
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 7c1ef6e1-c9b8-4627-8198-18fbb01c1566
+
+	measure 'Comercios Trx formateado mes ant' = ```
+			
+			
+			VAR Valor = [Comercios Trx mes ant]  -- reemplazá por tu medida base
+			VAR Escala =
+			    SWITCH(
+			        TRUE(),
+			        ABS(Valor) >= 1000, Valor / 1000,
+			        Valor
+			    )
+			VAR Sufijo =
+			    SWITCH(
+			        TRUE(),
+			        ABS(Valor) >= 1000, " K",
+			        ""
+			    )
+			RETURN
+			IF(
+			    MOD(Escala,1) = 0,
+			    FORMAT(Escala, "# ##0") & Sufijo,
+			    FORMAT(Escala, "# ##0.0") & Sufijo
+			)
+			
+			```
+		lineageTag: 9ae02188-fdbf-4be0-a877-9c4cdc357af5
+
+	measure 'Comercios Monto Bruto formateado mes ant' = ```
+			
+			
+			VAR Valor = [Comercios Monto Bruto mes ant]  -- tu medida base
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ABS(Valor) >= 1000000000, FORMAT(Valor / 1000000000, "$# ##0.0") & " MM",
+			    ABS(Valor) >= 1000000,    FORMAT(Valor / 1000000, "$# ##0.0") & " M",
+			    FORMAT(Valor, "$# ##0")
+			)
+			
+			```
+		lineageTag: 42d2092c-7b98-480f-9bec-93f7e7e132e2
+
+	measure 'Comercios Ticket Promedio formateado $ K mes ant' =
+			
+			VAR Valor = [Comercios Ticket Promedio mes ant]  -- reemplazá por tu medida base
+			VAR Escala =
+			    SWITCH(
+			        TRUE(),
+			        ABS(Valor) >= 1000, Valor / 1000,
+			        Valor
+			    )
+			VAR Sufijo =
+			    SWITCH(
+			        TRUE(),
+			        ABS(Valor) >= 1000, " K",
+			        ""
+			    )
+			RETURN
+			IF(
+			    MOD(Escala,1) = 0,
+			    FORMAT(Escala, "$# ##0") & Sufijo,
+			    FORMAT(Escala, "$# ##0.0") & Sufijo
+			)
+		lineageTag: e856caa7-0f55-47c2-9ec8-88b42c6b136f
+
+	measure 'Comercios TPV %' =
+			
+			DIVIDE (
+			    [Comercios Monto Bruto],
+			    CALCULATE (
+			        [Comercios Monto Bruto],
+			        ALL ( DimComercios_Unicos ) -- Importante: Apuntamos a la nueva tabla única
+			    ),
+			    0
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 2e03b891-9881-4032-874a-b116db80011c
+
+	measure 'Cantidad Sucursales' = ```
+			DISTINCTCOUNT(FactTransaccionesComercios[SucursalID]) 
+			```
+		formatString: 0
+		lineageTag: 00669d2c-b28b-4422-825d-2a3e4225893b
+
+	measure 'Comercios % Part Clientes' = ```
+			
+			VAR ClientesComercio = [Comercios Cantidad Clientes]
+			VAR ClientesTotales = 
+			    CALCULATE (
+			       [Comercios Cantidad Clientes],
+			        ALL ( DimComercios_Unicos ) -- Quita el filtro de comercio para obtener el universo total
+			    )
+			RETURN
+			    DIVIDE ( ClientesComercio, ClientesTotales )
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 6eee58c2-1589-4d8e-aa75-3fb5c1805ba3
+
+	measure '% Realizada' =
+			
+			VAR _TrxFiltradas = CALCULATE( [Comercios Trx], DimEstadoTransacciones[EstadoTransaccionGrupo] = "Realizada" )
+			VAR _TrxTotales = CALCULATE( [Comercios Trx], REMOVEFILTERS( DimEstadoTransacciones[EstadoTransaccionGrupo] ) )
+			RETURN
+			    DIVIDE( _TrxFiltradas, _TrxTotales )
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 2652c9e4-3124-479a-a61c-205fba83a589
+
+	measure '% Rechazada' =
+			
+			VAR _TrxFiltradas = CALCULATE( [Comercios Trx], DimEstadoTransacciones[EstadoTransaccionGrupo] = "Rechazada" )
+			VAR _TrxTotales = CALCULATE( [Comercios Trx], REMOVEFILTERS( DimEstadoTransacciones[EstadoTransaccionGrupo] ) )
+			RETURN
+			    DIVIDE( _TrxFiltradas, _TrxTotales )
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: aa171ac4-0c3f-431b-845f-afda9660218e
+
+	measure '% Resto' =
+			
+			VAR _TrxFiltradas = CALCULATE( [Comercios Trx], DimEstadoTransacciones[EstadoTransaccionGrupo] = "Resto" )
+			VAR _TrxTotales = CALCULATE( [Comercios Trx], REMOVEFILTERS( DimEstadoTransacciones[EstadoTransaccionGrupo] ) )
+			RETURN
+			    DIVIDE( _TrxFiltradas, _TrxTotales )
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: d61553ce-635b-43ba-80cd-be992e8739dc
+
+	measure 'Comercios Monto Bruto %MoM Indicador' =
+			
+			VAR Variacion = [Comercios Monto Bruto %MoM]
+			VAR Flecha =
+			    IF(
+			        Variacion > 0,
+			        "▲",
+			        IF(Variacion < 0, "▼", "•")
+			    )
+			
+			RETURN
+			Flecha
+		lineageTag: 1239455c-994b-4205-b3db-89f01b9bc141
+
+	measure 'Medida Seleccionada' =
+			
+			VAR Seleccion = SELECTEDVALUE(Selector_medidas[Medida])
+			
+			RETURN
+			    SWITCH(
+			        Seleccion,
+			        "Volumen ($)", [Comercios Monto Bruto],      // Reemplaza con tu medida de dinero
+			        "Transacciones",[Comercios Trx],        // Reemplaza con tu medida de conteo
+			       [Comercios Trx]                     // Valor por defecto si no hay selección
+			    )
+		lineageTag: 0199c0dd-efd8-4be1-8ce1-bcf4298a8d60
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MONTO BRUTO SIN FORMATO' = sum(FactTransaccionesComercios[MontoBruto])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: a49d841a-2fa7-4aad-8cb6-4c61c2c8d53c
+
+	measure 'TRX SIN FORMATO' = sum(FactTransaccionesComercios[CantidadTxt])
+		formatString: #,0
+		lineageTag: 58a66a02-5b7e-4459-9571-5aff6a73e529
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Ticket Promedio SIN FORMATO' =
+			
+			DIVIDE (
+			[MONTO BRUTO SIN FORMATO],
+			[TRX SIN FORMATO],
+			    0
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 7a31d3cb-8c1f-44d2-aef7-112289f81439
+
+	measure 'Medida Seleccionada VALOR' =
+			
+			VAR Seleccion = SELECTEDVALUE(Selector_medidas[Medida])
+			
+			RETURN
+			    SWITCH(
+			        Seleccion,
+			        "Volumen ($)", [Comercios Monto Bruto formateado],      // Reemplaza con tu medida de dinero
+			        "Transacciones",[Comercios Trx formateado],        // Reemplaza con tu medida de conteo
+			       [Comercios Trx formateado]                     // Valor por defecto si no hay selección
+			    )
+		lineageTag: 7c08ba93-f516-42fa-a8b3-6e8310a0ff3d
+
+	measure 'Medida Seleccionada DETALLE' =
+			
+			VAR Seleccion = SELECTEDVALUE(Selector_medidas[Medida])
+			
+			RETURN
+			    SWITCH(
+			        Seleccion,
+			        "Volumen ($)", [Comercios Monto Bruto %MoM label],      // Reemplaza con tu medida de dinero
+			        "Transacciones",[Comercios Trx %MoM label],        // Reemplaza con tu medida de conteo
+			       [Comercios Trx %MoM label]                     // Valor por defecto si no hay selección
+			    )
+		lineageTag: 1f05ec75-9fe7-454e-bbe4-567af885146d
+
+	measure 'Medida Seleccionada FORMATO CONDICIONAL' =
+			
+			VAR Seleccion = SELECTEDVALUE(Selector_medidas[Medida])
+			
+			RETURN
+			    SWITCH(
+			        Seleccion,
+			        "Volumen ($)", [Comercios Monto Bruto %MoM color],      // Reemplaza con tu medida de dinero
+			        "Transacciones",[Comercios Trx %MoM color],        // Reemplaza con tu medida de conteo
+			      [Comercios Trx %MoM color]                     // Valor por defecto si no hay selección
+			    )
+		lineageTag: c1d7bb74-cfd9-4535-8889-1c9d365ae733
+
+	measure Filtro_Mapa =
+			
+			VAR _Transacciones = [TRX SIN FORMATO]
+			VAR _MinSeleccionado = MIN(Rango_Trx[Min])
+			VAR _MaxSeleccionado = MAX(Rango_Trx[Max])
+			
+			RETURN
+			IF(
+			    ISFILTERED(Rango_Trx[Etiqueta (Texto)]),
+			    IF(_Transacciones >= _MinSeleccionado && _Transacciones <= _MaxSeleccionado, 1, 0),
+			    1 -- Si no hay nada seleccionado, muestra todo
+			)
+		formatString: 0
+		lineageTag: b7bff91b-a3be-4c04-ab7f-b2fcba68a1bb
+
+	measure Color_Mapa =
+			
+			VAR _T = [TRX SIN FORMATO]
+			RETURN
+			SWITCH(TRUE(),
+			    _T > 5000, "#228B22",   -- Verde (ForestGreen)
+			    _T >= 1500, "#FFD700",  -- Amarillo (Gold)
+			    _T >= 800, "#FF8C00",   -- Naranja (DarkOrange)
+			    "#FF0000"               -- Rojo
+			)
+		lineageTag: 55b3ca7d-7c00-4fbb-aaf7-719c85bfe76c
+
+	measure 'Color Rubro' = ```
+			
+			SWITCH(
+			    SELECTEDVALUE('DimComercios_Unicos'[Rubro]),
+			    "Supermercados", "#62B6F3",
+			    "Jugueterías Y Librerías",     "#C0E2FA",
+			    "Indumentaria",  "#3983B8",
+			    "Sin Asignar",   "#009C49",
+			    "Otros",         "#B37EC4",
+			    "#7F7F7F"
+			)
+			
+			```
+		lineageTag: 4233a779-3d11-43db-a9aa-881bc69b5ef5
+
+	measure 'Cant. Comercios Nuevos (Acum.)' = ```
+			
+			VAR FechaMaximaVisible = MAX('DimTiempo'[Fecha])
+			RETURN
+			CALCULATE(
+			    [Cantidad Comercios nuevos],
+			    FILTER(
+			        ALL('DimTiempo'),
+			        'DimTiempo'[Fecha] <= FechaMaximaVisible && 
+			        'DimTiempo'[Fecha] >= DATE(2025,7,1)
+			    )
+			)
+			```
+		formatString: 0
+		lineageTag: 21e15f4f-a2f9-4441-be36-27bc650fb35b
+
+	measure 'Comercios Reactivados 1 (Acum.)' = ```
+			
+			VAR FechaMaxEjeX = MAX('DimTiempo (2)'[Fecha])
+			VAR MinFechaSelector = MIN('DimTiempo'[Fecha])
+			VAR MaxFechaSelector = MAX('DimTiempo'[Fecha])
+			
+			// 1. Calculamos el acumulado real sin que el selector principal corte el pasado
+			VAR ResultadoAcumulado = 
+			    CALCULATE(
+			        [Comercios Reactivados 1],
+			        FILTER(
+			            ALL('DimTiempo (2)'),
+			            'DimTiempo (2)'[Fecha] <= FechaMaxEjeX && 
+			            'DimTiempo (2)'[Fecha] >= DATE(2025, 1, 1)
+			        ),
+			        REMOVEFILTERS('DimTiempo')
+			    )
+			
+			// 2. Forzamos a que el gráfico solo muestre las barras/puntos del periodo seleccionado
+			RETURN
+			IF(
+			    FechaMaxEjeX >= MinFechaSelector && FechaMaxEjeX <= MaxFechaSelector,
+			    ResultadoAcumulado
+			)
+			```
+		formatString: 0
+		lineageTag: 831c30df-495e-4995-8029-c624c0557e29
+
+	measure 'Cantidad Comercios nuevos Etiqueta Dinamica' =
+			
+			VAR ValorMensual = [Cantidad Comercios nuevos]
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ValorMensual > 0, "+" & FORMAT(ValorMensual, "#,##0"),
+			    ValorMensual < 0, FORMAT(ValorMensual, "#,##0"), -- El signo "-" ya viene en el formato numérico
+			    "0"
+			)
+		lineageTag: 07b0e57c-1a26-49ab-b204-bbe366357a76
+
+	measure 'Cantidad Comercios nuevos Color Etiqueta' =
+			
+			VAR ValorMensual = [Cantidad Comercios nuevos]
+			RETURN
+			IF(ValorMensual >= 0, "#008000", "#FF0000") -- Verde para positivo, Rojo para negativo
+		lineageTag: c82ed838-0e56-4569-b3c0-ecd33ac60d19
+
+	measure 'Etiqueta Dinamica Reactivados' =
+			
+			VAR ValorMensual = [Comercios Reactivados 1]
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ValorMensual > 0, "+" & FORMAT(ValorMensual, "#,##0"),
+			    ValorMensual < 0, FORMAT(ValorMensual, "#,##0"),
+			    "0"
+			)
+		lineageTag: efb97579-ef30-4125-a155-34741f844295
+
+	measure 'Color Etiqueta Reactivados' =
+			
+			VAR ValorMensual = [Comercios Reactivados 1]
+			RETURN
+			IF(ValorMensual >= 0, "#008000", "#FF0000")
+		lineageTag: 75d6159b-d211-4f70-9b8e-b0931a61cde4
+
+	measure 'Total Comercios habilitados' =
+			
+			CALCULATE(
+			    [Cantidad Comercios],
+			    'DimComercios'[Habilitado] = "Si",
+			    ALL('DimTiempo')
+			)
+		formatString: #,0
+		lineageTag: 83d46db4-73f4-42ce-8207-13f4d18bd2d4
+
+	measure 'Volumen Reintegro' =
+			
+			CALCULATE(
+			    [MONTO BRUTO SIN FORMATO],
+			    'DimCampañas'[Campaña_Grupo] = "Campañas con Reintegro"
+			)
+		lineageTag: 7a170560-58e9-4a10-a636-d027049fe472
+
+		formatStringDefinition =
+				VAR Valor = SELECTEDMEASURE()
+				RETURN
+				SWITCH (
+				    TRUE (),
+				    ISBLANK(Valor), "$ 0",
+				    ABS ( Valor ) >= 1000000000, FORMAT ( Valor / 1000000000, "$# ##0.00" ) & " MM",
+				    ABS ( Valor ) >= 1000000,    FORMAT ( Valor / 1000000, "$# ##0.00" ) & " M",
+				    ABS ( Valor ) >= 1000,       FORMAT ( Valor / 1000, "$# ##0" ) & " K",
+				    FORMAT ( Valor, "$# ##0" )
+				)
+
+	measure 'Volumen Orgánico ($)' = ```
+			
+			CALCULATE(
+			    [MONTO BRUTO SIN FORMATO],
+			    'DimCampañas'[Campaña] = "Sin Asignar" || 
+			    CONTAINSSTRING('DimCampañas'[Campaña], "Base")
+			)
+			```
+		lineageTag: bb40b308-4f5c-4b86-9731-9b73061bc450
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Volumen ($) Campañas' =
+			
+			CALCULATE(
+			    [MONTO BRUTO SIN FORMATO],
+			    KEEPFILTERS('DimCampañas'[Campaña] <> "Sin Asignar"),
+			    KEEPFILTERS(
+			        NOT(CONTAINSSTRING('DimCampañas'[Campaña], "Base"))
+			    )
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 480c0f6e-4c46-4be6-9f3d-b53e54a5850c
+
+	measure '% Participación Volumen ($) Reintegro Campañas' =
+			
+			VAR VolumenConCampana = [Volumen Reintegro]
+			VAR VolumenTotal = CALCULATE([MONTO BRUTO SIN FORMATO], ALL('DimCampañas'[Campaña]))
+			RETURN
+			DIVIDE(VolumenConCampana, VolumenTotal, 0)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: f4b07e74-5988-43c0-90ae-0e1662d46b55
+
+	measure '% Participación TRX Campañas Reintegro' =
+			
+			VAR VolumenConCampana =  [TRX Campañas Reintegro]
+			VAR VolumenTotal = CALCULATE([TRX SIN FORMATO], ALL('DimCampañas'[Campaña]))
+			RETURN
+			DIVIDE(VolumenConCampana, VolumenTotal, 0)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 720fef54-4f1c-4659-b919-2a2140252f60
+
+	measure Volumen_Total = CALCULATE([MONTO BRUTO SIN FORMATO], ALL('DimCampañas'[Tipo de Tráfico]))
+		lineageTag: 8e7a0ee2-c562-4532-82ad-6eb821d68019
+
+		formatStringDefinition =
+				VAR Valor = SELECTEDMEASURE()
+				RETURN
+				SWITCH (
+				    TRUE (),
+				    ISBLANK(Valor), "$ 0",
+				    ABS ( Valor ) >= 1000000000, FORMAT ( Valor / 1000000000, "$# ##0.00" ) & " MM",
+				    ABS ( Valor ) >= 1000000,    FORMAT ( Valor / 1000000, "$# ##0.00" ) & " M",
+				    ABS ( Valor ) >= 1000,       FORMAT ( Valor / 1000, "$# ##0" ) & " K",
+				    FORMAT ( Valor, "$# ##0" )
+				)
+
+	measure 'Volumen-Total formateado' = ```
+			
+			
+			VAR Valor = [Volumen_Total]  -- tu medida base
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ABS(Valor) >= 1000000000, FORMAT(Valor / 1000000000, "$# ##0.00") & " MM",
+			    ABS(Valor) >= 1000000,    FORMAT(Valor / 1000000, "$# ##0.00") & " M",
+			    FORMAT(Valor, "$# ##0")
+			)
+			
+			```
+		lineageTag: b218bf77-af21-415b-a8aa-0ac49248b908
+
+	measure 'Volumen Eje Dinamico' =
+			
+			VAR Valor = [Volumen_Total]
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ABS(Valor) >= 1000000000, Valor / 1000000000,
+			    ABS(Valor) >= 1000000, Valor / 1000000,
+			    Valor
+			)
+		lineageTag: 9d2c85b9-eeda-480e-ba17-47cf74d8f8b3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Etiqueta Campañas Multilínea' = ```
+			
+			VAR ValorReal = [Volumen Reintegro]
+			VAR Porcentaje = [% Participación Volumen ($) Reintegro Campañas]
+			
+			-- Formato de porcentaje
+			VAR PorcentajeFormateado = FORMAT(Porcentaje, "0.0%")
+			
+			-- Formato del valor absoluto con escala
+			VAR ValorFormateado = 
+			    SWITCH (
+			        TRUE (),
+			        ABS ( ValorReal ) >= 1000000000, FORMAT ( ValorReal / 1000000000, "$# ##0.00" ) & " MM",
+			        ABS ( ValorReal ) >= 1000000,    FORMAT ( ValorReal / 1000000, "$# ##0.00" ) & " M",
+			        FORMAT ( ValorReal, "$# ##0" )
+			    )
+			
+			RETURN
+			PorcentajeFormateado & UNICHAR(10) & ValorFormateado
+			```
+		lineageTag: 3b1ca2b0-e90f-46b7-a925-b9d9a799073e
+
+	measure TRX_Total = CALCULATE([TRX SIN FORMATO], ALL('DimCampañas'[Tipo de Tráfico]))
+		formatString: #,0
+		lineageTag: 423da2b0-ecbb-4b1b-98c9-132158764719
+
+	measure 'TRX Campañas Reintegro' =
+			
+			CALCULATE(
+			    [TRX SIN FORMATO],
+			   'DimCampañas'[Campaña_Grupo] = "Campañas con Reintegro"
+			)
+		formatString: #,0
+		lineageTag: 186f9987-4c87-4b0d-b466-a293ca783835
+
+	measure 'Comercios Monto Bruto formateado 1' = ```
+			
+			
+			VAR Valor = [Comercios Monto Bruto]  -- tu medida base
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ABS(Valor) >= 1000000000, FORMAT(Valor / 1000000000, "$# ##0.0") & " MM",
+			    ABS(Valor) >= 1000000,    FORMAT(Valor / 1000000, "$# ##0.0") & " M",
+			    FORMAT(Valor, "$# ##0")
+			)
+			
+			```
+		lineageTag: 7afd846e-35f8-461f-98b6-829ada44fdb3
+
+	measure 'TRX Campañas' =
+			
+			CALCULATE(
+			    [TRX SIN FORMATO],
+			   'DimCampañas'[Tipo de Tráfico] = "Con Campañas"
+			)
+		formatString: #,0
+		lineageTag: b698a7d4-a428-493d-871d-dacdd0ce9ef1
+
+	measure '% Participación TRX Campañas' =
+			
+			VAR VolumenConCampana =  [TRX Campañas]
+			VAR VolumenTotal = CALCULATE([TRX SIN FORMATO], ALL('DimCampañas'[Tipo de Tráfico]))
+			RETURN
+			DIVIDE(VolumenConCampana, VolumenTotal, 0)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 885485ca-404f-4c85-b0f4-b3649b6d89c9
+
+	measure 'Volumen ($) Campañas 1' =
+			
+			
+			CALCULATE(
+			    [MONTO BRUTO SIN FORMATO],
+			   'DimCampañas'[Tipo de Tráfico] = "Con Campañas"
+			)
+		lineageTag: 219b873a-86d2-41ee-9638-39c28e54574e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Participación Volumen ($)  Campañas' =
+			
+			VAR VolumenConCampana = [Volumen ($) Campañas 1]
+			VAR VolumenTotal = [Volumen_Total]
+			RETURN
+			DIVIDE(VolumenConCampana, VolumenTotal, 0)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 30aa9ca8-fe6a-4f39-b6f3-dbd9cb7e4b20
+
+	measure 'Monto Bruto Ajustado' =
+			
+			IF(
+			    ISINSCOPE('DimComercios'[RubroComercio]),
+			    [MONTO BRUTO SIN FORMATO],
+			    SUMX(
+			        VALUES('DimComercios'[RubroComercio]),
+			        [MONTO BRUTO SIN FORMATO]
+			    )
+			)
+		lineageTag: e662247f-158e-4688-a29b-d55736d0999c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'trx Ajustado' =
+			
+			IF(
+			    ISINSCOPE('DimComercios'[RubroComercio]),
+			    [TRX SIN FORMATO],
+			    SUMX(
+			        VALUES('DimComercios'[RubroComercio]),
+			        [TRX SIN FORMATO]
+			    )
+			)
+		formatString: 0
+		lineageTag: e4562c74-5c23-480a-8b76-e594756ec307
+
+	measure 'Comercios Nuevos con Trx' = ```
+			
+			CALCULATE(
+			    [Cantidad Comercios nuevos],
+			    FILTER(
+			        VALUES(DimComercios[ComercioID]), // Reemplaza con la tabla y columna que identifica a tu comercio de forma única
+			        [TRX SIN FORMATO] > 0 
+			    )
+			)
+			```
+		formatString: 0
+		lineageTag: 94a99501-ab46-4a0c-9295-84561642a83b
+
+	measure 'Comercios Nuevos sin Trx' =
+			
+			CALCULATE(
+			    [Cantidad Comercios nuevos] ,
+			    FILTER(
+			        VALUES(DimComercios[ComercioID]) , // Reemplazar por tu tabla y columna de clave única de comercio
+			        ISBLANK([TRX SIN FORMATO]) || [TRX SIN FORMATO] = 0
+			    )
+			)
+		formatString: 0
+		lineageTag: 0d3e2bce-fcb9-44f7-aac4-8dd1385920ac
+
+	measure 'TRX SIN FORMATO blank' = IF(ISBLANK(sum(FactTransaccionesComercios[CantidadTxt])),0,sum(FactTransaccionesComercios[CantidadTxt]))
+		formatString: 0
+		lineageTag: 1d23846f-412a-40c6-82ba-9e5f5e2fbed7
+
+	measure 'Comercios Reactivados total (Acum.)' = ```
+			
+			VAR AnioSeleccionado = SELECTEDVALUE('DimTiempo'[AñoFiscal])
+			VAR FechaMaxEjeX = MAX('DimTiempo (2)'[Fecha])
+			VAR MinFechaSelector = MIN('DimTiempo'[Fecha])
+			VAR MaxFechaSelector = MAX('DimTiempo'[Fecha])
+			
+			VAR Resultado2026 = 
+			    CALCULATE(
+			        [Comercios Reactivados 1],
+			        FILTER(
+			            ALL('DimTiempo (2)'),
+			            'DimTiempo (2)'[Fecha] <= FechaMaxEjeX && 
+			            'DimTiempo (2)'[Fecha] >= DATE(2025, 1, 1)
+			        ),
+			        REMOVEFILTERS('DimTiempo')
+			    )
+			
+			VAR Resultado2027 = 
+			    CALCULATE(
+			        [Comercios Reactivados 2027],
+			        FILTER(
+			            ALL('DimTiempo (2)'),
+			            'DimTiempo (2)'[Fecha] <= FechaMaxEjeX && 
+			            'DimTiempo (2)'[Fecha] >= DATE(2025, 1, 1)
+			        ),
+			        REMOVEFILTERS('DimTiempo')
+			    )
+			
+			VAR ResultadoFinal = 
+			    SWITCH(
+			        TRUE(),
+			        AnioSeleccionado = 2026, Resultado2026,
+			        AnioSeleccionado = 2027, Resultado2027,
+			        ISBLANK(AnioSeleccionado), Resultado2026 + Resultado2027,
+			        BLANK()
+			    )
+			
+			RETURN
+			IF(
+			    FechaMaxEjeX >= MinFechaSelector && FechaMaxEjeX <= MaxFechaSelector,
+			    ResultadoFinal
+			)
+			```
+		lineageTag: 9f574e0a-6f7a-4d89-b9ae-c646a2de2f18
+
+	measure 'Comercios Reactivados 2027' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(DimComerciosReactivados[ComercioEcosistemaID]) ,
+			    DimComerciosReactivados[FlagReactivadoAñoFiscal2027] = "Comercio Reactivado" ,
+			     USERELATIONSHIP('DimComerciosReactivados'[FechaPrimeraTransaccion_Date_2027], 'DimTiempo (2)'[Fecha]
+			))
+		lineageTag: b754d115-55c6-4df8-aa1b-6a2a8f1d7f49
+
+	measure 'MONTO BRUTO SIN FORMATO  Comercios Reactivados 2027' = CALCULATE(sum(FactTransaccionesComercios[MontoBruto]),  USERELATIONSHIP('DimComerciosReactivados'[FechaPrimeraTransaccion_Date_2027], 'DimTiempo (2)'[Fecha]))
+		lineageTag: 18fdb708-5507-4dd7-baff-4c4d8ca05df3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'TRX SIN FORMATO Comercios Reactivados 2027' = CALCULATE(sum(FactTransaccionesComercios[CantidadTxt]),USERELATIONSHIP('DimComerciosReactivados'[FechaPrimeraTransaccion_Date_2027], 'DimTiempo (2)'[Fecha]))
+		formatString: #,0
+		lineageTag: c1e46c29-bd4e-4d5b-884c-694d323f679a
+
+	measure 'Ticket Promedio SIN FORMATO Comercios reactivados 2027' =
+			
+			CALCULATE(DIVIDE (
+			[MONTO BRUTO SIN FORMATO  Comercios Reactivados 2027],
+			[TRX SIN FORMATO Comercios Reactivados 2027] ,
+			    0
+			))
+		lineageTag: 90b86f2e-755d-4896-b5c8-3a0f12ad9e92
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'TRX SIN FORMATO Comercios Nuevos 2027' = SUM(Comercios_nuevos_2027[trx])
+		formatString: 0
+		lineageTag: 1cebfbd5-4973-4787-a70b-5f0e9fe4c1bc
+
+	measure 'Monto Comercios nuevos 2027' = sum(Comercios_nuevos_2027[monto_bruto])
+		lineageTag: 5b91238f-41d8-4435-bb69-e41148419c93
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ticket Promedio Comercios nuevos 2027' =
+			
+			DIVIDE (
+			[Monto Comercios nuevos 2027],
+			[TRX SIN FORMATO Comercios Nuevos 2027],
+			    0)
+		formatString: #,0
+		lineageTag: ec0296a3-a264-4a9c-84c9-d5872c276529
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Comercios nuevos sin transacciones FY 2027' =
+			
+			IF(
+			    SELECTEDVALUE('DimTiempo (2)'[AñoFiscal]) = 2027,
+			    CALCULATE([Cantidad Comercios nuevos]) - DISTINCTCOUNT(Comercios_nuevos_2027[ComercioEcosistemaID]),
+			    0
+			)
+		formatString: 0
+		lineageTag: b1c30b95-3b7c-4b49-90ff-d5530af14934
+
+	measure 'TRX REALIZADAS' = CALCULATE(sum(FactTransaccionesComercios[CantidadTxt]),FactTransaccionesComercios[EstadoTransaccionID] = 11)
+		formatString: 0
+		lineageTag: c22cbef4-1406-49b0-b0dc-bb5948b82f90
+
+	measure 'MONTO BRUTO REALIZADAS' = CALCULATE(sum(FactTransaccionesComercios[MontoBruto]),FactTransaccionesComercios[EstadoTransaccionID] = 11)
+		lineageTag: 5aa2ef84-7587-4c19-97d9-ad214931f120
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ticket Promedio REALIZADAS' =
+			
+			DIVIDE (
+			[MONTO BRUTO REALIZADAS],
+			[TRX REALIZADAS],
+			    0
+			)
+		lineageTag: a02d4dd8-2e78-450f-876e-c7630a7686b3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cantidad comercios nuevos detalle' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(Comercios_nuevos_2027[ComercioEcosistemaID]),
+			    OR(
+			        Comercios_nuevos_2027[flag_comercio_reactivado_2026] = "Comercio Nuevo",
+			        Comercios_nuevos_2027[flag_comercio_reactivado_2027] = "Comercio Nuevo"
+			    )
+			)
+		formatString: 0
+		lineageTag: ca050a13-f75b-405e-8894-37ac92b5199b
+
+	measure 'Comercios Nuevos sin Trx nuevo' =
+			
+			CALCULATE(
+			    [Cantidad comercios nuevos detalle] ,
+			    FILTER(
+			        VALUES(Comercios_nuevos_2027[ComercioEcosistemaID]) , // Reemplazar por tu tabla y columna de clave única de comercio
+			        ISBLANK([TRX REALIZADAS]) || [TRX REALIZADAS] = 0
+			    )
+			)
+		formatString: 0
+		lineageTag: 1d034400-c3a9-4ce6-abf2-422f36d06161
+
+	measure 'TRX Comercios Reactivados' =
+			
+			CALCULATE(
+			    SUM('FactTransaccionesComercios'[CantidadTxt]),
+			    CROSSFILTER('ComerciosReactivados_Long'[ComercioEcosistemaID], 'DimComercioEcosistemaID_Unicos'[ComercioEcosistemaID], BOTH)
+			)
+		formatString: 0
+		lineageTag: 654fb9f6-a431-47e6-aec5-ddcda4f365db
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Columna1 = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Columna1", type text}}),
+				    #"Columnas quitadas" = Table.RemoveColumns(#"Tipo cambiado",{"Columna1"})
+				in
+				    #"Columnas quitadas"
+
+	annotation PBI_ResultType = Table
+

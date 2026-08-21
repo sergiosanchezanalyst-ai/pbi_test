@@ -1,0 +1,72 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-AR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup DIMs
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup FACTs
+
+	annotation PBI_QueryGroupOrder = 1
+
+annotation PBI_QueryOrder = ["DimTiempo","DimComerciosReactivados","Medidas","FactTransaccionesComercios","DimComercios","DimEstadoTransacciones","DimCampañas","DimCampañasExclusiones","DimProvincia","Selector_medidas","Rango_Trx","DimGrupoRubrosComercios","Rubros_2","DimTiempo (2)","Operaciones DimEntidades","PersonaUnica DimPersonas","Operaciones DimComerciosRubrosComercios","Operaciones DimRubrosComercios","DimProvincia 2","Campañas_reintegros","PBI uvFactCampañasMensualPorRubro","Operaciones DimFormaPagos","TODO","CFT","CFT - MES","CFT - CUOTAS","DimComercios (2)","Comercios_nuevos_2027","DimTiempo (5)"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_bf8fe346-77d7-4a6e-a2cc-ba3aba582911
+ref table DimTiempo
+ref table LocalDateTable_1b5e377b-a5e2-4938-8cf3-11aa13cd662a
+ref table DimComerciosReactivados
+ref table FactTransaccionesComercios
+ref table Medidas
+ref table DimComercios
+ref table LocalDateTable_435e2d1f-b628-4e3a-948e-b00c983748e9
+ref table DimEstadoTransacciones
+ref table DimCampañas
+ref table DimCampañasExclusiones
+ref table DimProvincia
+ref table LocalDateTable_37d980f2-f6ad-4a65-b960-2139a49f0ba2
+ref table DimComercios_Unicos
+ref table Selector_medidas
+ref table LocalDateTable_cc1429fa-22c8-4436-8153-830b7ad86c8a
+ref table Rango_Trx
+ref table 'DimComercios_Unicos (Fact)'
+ref table DimGrupoRubrosComercios
+ref table Rubros_2
+ref table 'DimTiempo (2)'
+ref table LocalDateTable_d2c1e56f-3fe6-45c4-9ca4-1c3179bc6001
+ref table LocalDateTable_d321f1ce-de60-4011-a31e-6d97bc0c3df6
+ref table 'Operaciones DimEntidades'
+ref table 'PersonaUnica DimPersonas'
+ref table 'Operaciones DimComerciosRubrosComercios'
+ref table 'Operaciones DimRubrosComercios'
+ref table 'DimProvincia 2'
+ref table Campañas_reintegros
+ref table 'PBI uvFactCampañasMensualPorRubro'
+ref table 'Operaciones DimFormaPagos'
+ref table TODO
+ref table CFT
+ref table 'CFT - MES'
+ref table 'CFT - CUOTAS'
+ref table LocalDateTable_71429347-0a19-4d4c-8a89-6f3130a43b2d
+ref table 'DimComercios (2)'
+ref table LocalDateTable_126441fc-7097-434a-8f4e-5ac47bf561f1
+ref table LocalDateTable_d60a1e25-b9ff-443a-bfbf-4c881934f39d
+ref table LocalDateTable_84d41c66-b234-4a83-a633-9ce06d56e42b
+ref table LocalDateTable_22d08d76-d7fb-421a-847a-156c4f3f828a
+ref table Comercios_nuevos_2027
+ref table 'DimTiempo (5)'
+ref table LocalDateTable_04b4cec4-8a46-41b3-96cd-9c8a1fdd13a7
+ref table ComerciosReactivados_Long
+ref table LocalDateTable_e82c90bc-7c99-4fde-9dad-5f57342ed930
+ref table DimComercioEcosistemaID_Unicos
+
+ref cultureInfo es-ES
+

@@ -1,0 +1,34 @@
+table DimGrupoRubrosComercios
+	lineageTag: 7f583f63-34c3-42a6-93d3-1396d89ff1ee
+
+	column GrupoRubroComercioID
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d421eb4-dfe1-4896-b705-ef73cc5692a1
+		summarizeBy: none
+		sourceColumn: GrupoRubroComercioID
+
+		annotation SummarizationSetBy = Automatic
+
+	column GrupoRubroComercio
+		dataType: string
+		lineageTag: 4b6a2dac-6293-4b2f-85be-9b8af8b189d0
+		summarizeBy: none
+		sourceColumn: GrupoRubroComercio
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimGrupoRubrosComercios = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW"),
+				    Operaciones_DimGrupoRubrosComercios = Origen{[Schema="Operaciones",Item="DimGrupoRubrosComercios"]}[Data]
+				in
+				    Operaciones_DimGrupoRubrosComercios
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

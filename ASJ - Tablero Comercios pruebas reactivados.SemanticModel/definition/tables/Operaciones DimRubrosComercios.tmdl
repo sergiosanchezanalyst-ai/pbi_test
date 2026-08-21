@@ -1,0 +1,70 @@
+table 'Operaciones DimRubrosComercios'
+	lineageTag: fe050500-85df-467f-bc8e-1388ef487cdb
+
+	column RubroComercioID
+		dataType: int64
+		formatString: 0
+		lineageTag: b6066414-ae12-40d6-a2e7-e5d46e680396
+		summarizeBy: none
+		sourceColumn: RubroComercioID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RubroComercio
+		dataType: string
+		lineageTag: 915cec1a-1921-45a7-9e2c-bcf0c076acb7
+		summarizeBy: none
+		sourceColumn: RubroComercio
+
+		annotation SummarizationSetBy = Automatic
+
+	column GrupoRubroComercioID
+		dataType: int64
+		formatString: 0
+		lineageTag: be1b5018-2023-4fce-9b02-354098f4e4f8
+		summarizeBy: count
+		sourceColumn: GrupoRubroComercioID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RubroComercioSistemaID
+		dataType: int64
+		formatString: 0
+		lineageTag: d919deb4-b565-4959-923e-42484b76dde8
+		summarizeBy: count
+		sourceColumn: RubroComercioSistemaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EcosistemaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 51a4e8bf-7979-465e-994f-7b12a7eb201b
+		summarizeBy: count
+		sourceColumn: EcosistemaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Habilitado
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: beaaeba4-ba88-43c0-9eb7-e41d35c78c10
+		summarizeBy: none
+		sourceColumn: Habilitado
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Operaciones DimRubrosComercios' = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW"),
+				    Operaciones_DimRubrosComercios = Origen{[Schema="Operaciones",Item="DimRubrosComercios"]}[Data]
+				in
+				    Operaciones_DimRubrosComercios
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

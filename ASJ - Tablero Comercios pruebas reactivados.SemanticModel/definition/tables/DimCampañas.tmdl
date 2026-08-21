@@ -1,0 +1,112 @@
+table DimCampañas
+	lineageTag: ad7da84e-3b91-4140-9b09-dcafa15c2028
+
+	column CampañaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 05b2a25e-8017-4a92-b74e-3017e891b4f1
+		summarizeBy: none
+		sourceColumn: CampañaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Campaña
+		dataType: string
+		lineageTag: 3e6a1e4e-1641-4bc2-9932-0a1d5f801471
+		summarizeBy: none
+		sourceColumn: Campaña
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo de Tráfico' = ```
+			
+			IF(
+			    'DimCampañas'[Campaña_Grupo] = "Sin Campañas" , "Sin Campañas",
+			   IF('DimCampañas'[Campaña_Grupo] = "", "" ,
+			   "Con Campañas"
+			   )
+			)
+			
+			```
+		lineageTag: f70334a7-fd20-4e7f-95d4-c5302f1388c1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Campaña_Grupo = ```
+			
+			SWITCH( 
+			    TRUE(),
+			    -- Prioridad 1: Reintegros (usando tu columna ya creada)
+			    'DimCampañas'[Es Reintegro] = 1 ||
+			     'DimCampañas'[Es reintegro tabla] = 1,
+			     "Campañas con Reintegro",
+			
+			    -- Prioridad 2: Cuotas (Contiene cualquiera de las palabras clave y NO contiene Base)
+			    (
+			        CONTAINSSTRING('DimCampañas'[Campaña], "CUOTAS") || 
+			        CONTAINSSTRING('DimCampañas'[Campaña], "CUOTA") || 
+			        CONTAINSSTRING('DimCampañas'[Campaña], "CSI") || 
+			        CONTAINSSTRING('DimCampañas'[Campaña], "TC")
+			    )
+			    && NOT CONTAINSSTRING('DimCampañas'[Campaña], "Base")
+			     && 'DimCampañas'[Es Reintegro] <> 1,
+			     
+			     
+			     "Campañas con Cuotas",
+			
+			    -- Prioridad 3: Sin Asignar
+			    'DimCampañas'[Campaña] = "Sin Asignar", "Sin Campañas",
+			
+			    -- Valor por defecto si no cumple ninguna
+			    ""
+			)
+			```
+		lineageTag: 05a94ed0-2f66-45c2-9727-f4ecbb7f42b8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Es Reintegro' = ```
+			
+			IF(
+			    CONTAINS(
+			        'Campañas_Reintegros', 
+			        'Campañas_Reintegros'[Nombre], 
+			        'DimCampañas'[Campaña]
+			    ),
+			    1,
+			    0
+			)
+			```
+		formatString: 0
+		lineageTag: b6d91557-2fdf-4f2e-9af6-da7f17b7b2b8
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Es reintegro tabla' =
+			
+			IF(
+			
+			(CONTAINSSTRING('DimCampañas'[Campaña], "Reintegro")), 1,0)
+		formatString: 0
+		lineageTag: c8d77c91-ce9a-42f2-8bd3-ac7c5c4d7cda
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCampañas = m
+		mode: import
+		queryGroup: DIMs
+		source =
+				let
+				    Origen = Sql.Database("ASJSQLDWLSTP", "ASJ_DW"),
+				    Operaciones_DimCampañas = Origen{[Schema="Operaciones",Item="DimCampañas"]}[Data]
+				in
+				    Operaciones_DimCampañas
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

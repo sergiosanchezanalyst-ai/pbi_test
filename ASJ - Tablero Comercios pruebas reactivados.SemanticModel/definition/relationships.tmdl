@@ -1,0 +1,224 @@
+relationship a0b437bf-aba0-4487-9810-aba534434077
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimTiempo.Fecha
+	toColumn: LocalDateTable_1b5e377b-a5e2-4938-8cf3-11aa13cd662a.Date
+
+relationship e2538388-ed76-4e18-88e8-3b343a6eab05
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimComercios.FechaBaja
+	toColumn: LocalDateTable_435e2d1f-b628-4e3a-948e-b00c983748e9.Date
+
+relationship fc3e1939-518b-1449-8129-6bdb00c50d3b
+	fromColumn: FactTransaccionesComercios.EstadoTransaccionID
+	toColumn: DimEstadoTransacciones.EstadoTransaccionID
+
+relationship AutoDetected_3f37d037-a9da-4f48-9e58-755e2aa9014d
+	fromColumn: FactTransaccionesComercios.Campaña
+	toColumn: DimCampañas.Campaña
+
+relationship 861a9d40-219e-7cbe-4c29-4b4ec1d40ea6
+	fromColumn: DimComercios.FechaAlta
+	toColumn: DimTiempo.Fecha
+
+relationship c996d66b-c79f-0096-6b12-ec3d68387e30
+	fromColumn: FactTransaccionesComercios.FechaID_Date
+	toColumn: DimTiempo.Fecha
+
+relationship eccf173b-c162-5393-3efb-e532f9006066
+	fromColumn: DimComercios.Provincia
+	toColumn: DimProvincia.Provincia
+
+relationship 4da274a7-6da8-444b-9d70-ef953e41ead1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimTiempo.'Fecha 1'
+	toColumn: LocalDateTable_37d980f2-f6ad-4a65-b960-2139a49f0ba2.Date
+
+relationship 521a1590-fa26-4ebe-b70c-19641ae013a4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimComercios.FechaModificacion
+	toColumn: LocalDateTable_cc1429fa-22c8-4436-8153-830b7ad86c8a.Date
+
+relationship 8a4b6b79-47a8-2eee-3758-a8267ab68a3f
+	toCardinality: many
+	fromColumn: FactTransaccionesComercios.ComercioID
+	toColumn: DimComercios.ComercioID
+
+relationship 357a09a9-d943-81d1-e568-9f6e7479d2ad
+	fromColumn: FactTransaccionesComercios.ComercioID
+	toColumn: DimComercios_Unicos.ComercioID
+
+relationship 35749b6f-1262-28d8-5d71-b60629ff7ee2
+	fromColumn: DimComercios_Unicos.Provincia
+	toColumn: DimProvincia.Provincia
+
+relationship 7ef98642-f810-b15a-41bb-fc944cf778a8
+	fromColumn: DimComercios.ComercioID
+	toColumn: 'DimComercios_Unicos (Fact)'.ComercioID
+
+relationship AutoDetected_d9f567bf-ad1f-45e3-99d8-c11549c4acae
+	fromColumn: DimComercios.GrupoRubroComercioID
+	toColumn: DimGrupoRubrosComercios.GrupoRubroComercioID
+
+relationship AutoDetected_fb53e88d-4c2b-4e5b-a36f-1d938e39a4e9
+	fromColumn: DimComercios.RubroComercio
+	toColumn: Rubros_2.RubroComercio
+
+relationship AutoDetected_e1cbf4da-f139-4420-aaf9-9cc3d73fccca
+	fromColumn: FactTransaccionesComercios.ComercioEcosistemaID
+	toColumn: DimComerciosReactivados.ComercioEcosistemaID
+
+relationship 1fe894ae-1b98-486a-a10e-e1eb4f7b5645
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'DimTiempo (2)'.Fecha
+	toColumn: LocalDateTable_d2c1e56f-3fe6-45c4-9ca4-1c3179bc6001.Date
+
+relationship 6a60b6c4-3913-4fb3-a33a-48e7baba42d6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimComerciosReactivados.FechaAlta
+	toColumn: LocalDateTable_d321f1ce-de60-4011-a31e-6d97bc0c3df6.Date
+
+relationship 6a3964e5-840c-6bba-fd88-bec6a51d473b
+	fromColumn: DimComerciosReactivados.FechaPrimeraTransaccion_Date_2026
+	toColumn: 'DimTiempo (2)'.Fecha
+
+relationship AutoDetected_e669447b-b982-4e87-83ae-f43526a38bd1
+	fromColumn: DimComerciosReactivados.EntidadID
+	toColumn: 'Operaciones DimEntidades'.EntidadID
+
+relationship AutoDetected_64b73627-8255-4c94-8e06-1e62e469cd8a
+	fromColumn: DimComerciosReactivados.PersonaID
+	toColumn: 'PersonaUnica DimPersonas'.PersonaID
+
+relationship AutoDetected_f12a9d0e-7adb-4211-9f35-89846af583ad
+	fromColumn: DimComercios.Entidad
+	toColumn: 'Operaciones DimEntidades'.Entidad
+
+relationship AutoDetected_1fcb4706-c9de-4dc2-ae74-287f0e348855
+	fromColumn: 'Operaciones DimComerciosRubrosComercios'.RubroComercioID
+	toColumn: 'Operaciones DimRubrosComercios'.RubroComercioID
+
+relationship AutoDetected_d67bfa5f-79fe-4840-a8ed-584d844e2163
+	fromColumn: DimComercios.PersonaID
+	toColumn: 'PersonaUnica DimPersonas'.PersonaID
+
+relationship 865b1bb0-2b6d-b4f8-e60e-0d1c2ec1201b
+	crossFilteringBehavior: bothDirections
+	fromColumn: DimComerciosReactivados.ComercioRubroComercioID
+	toColumn: 'Operaciones DimComerciosRubrosComercios'.ComercioRubroComercioID
+
+relationship 7f3bb1ad-74b2-a4b8-c8bc-a1dac8bfcfb4
+	fromColumn: Campañas_reintegros.Nombre
+	toColumn: DimCampañas.Campaña
+
+relationship 50fe5efc-2c30-4898-833f-50a767a949a5
+	isActive: false
+	fromColumn: 'Operaciones DimRubrosComercios'.GrupoRubroComercioID
+	toColumn: DimGrupoRubrosComercios.GrupoRubroComercioID
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2f0cda24-3205-2d36-7543-7d423bbf16ba
+	fromColumn: 'PBI uvFactCampañasMensualPorRubro'.CampañaID
+	toColumn: DimCampañas.CampañaID
+
+relationship 16b49685-2e86-9132-cd86-db7f8a469a59
+	fromColumn: 'PBI uvFactCampañasMensualPorRubro'.EntidadID
+	toColumn: 'Operaciones DimEntidades'.EntidadID
+
+relationship d4db7af3-d849-4ace-beff-bc4bb5b19277
+	fromColumn: 'PBI uvFactCampañasMensualPorRubro'.FechaID_Date
+	toColumn: DimTiempo.Fecha
+
+relationship 56945d5f-c2e5-2ac7-76bf-637f32e3b5ab
+	fromColumn: 'PBI uvFactCampañasMensualPorRubro'.FormaPagoID
+	toColumn: 'Operaciones DimFormaPagos'.FormaPagoID
+
+relationship 3a1960aa-0779-2e63-724e-d0fcd26d9ce7
+	fromColumn: 'PBI uvFactCampañasMensualPorRubro'.RubroComercioID
+	toColumn: 'Operaciones DimRubrosComercios'.RubroComercioID
+
+relationship b9ca7975-679c-4d39-4ae5-7c554c93cdd8
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'DimProvincia 2'.Provincia
+	toColumn: 'Operaciones DimEntidades'.Provincia
+
+relationship d27d6fee-ddd1-f692-39d4-5f6efe24de57
+	fromColumn: CFT.Mes
+	toColumn: 'CFT - MES'.Mes
+
+relationship 818ff262-f853-55e8-169e-9f89cb16b8bd
+	fromColumn: CFT.CSI
+	toColumn: 'CFT - CUOTAS'.CSI
+
+relationship 369d9a98-b415-fdd7-3875-e3e6a637f41c
+	fromColumn: DimComercios.FechaAlta
+	toColumn: 'DimTiempo (2)'.Fecha
+
+relationship e70f75ca-9301-49fc-89b6-b40e05caa288
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FactTransaccionesComercios.Fecha_dia
+	toColumn: LocalDateTable_71429347-0a19-4d4c-8a89-6f3130a43b2d.Date
+
+relationship ed347968-458c-4013-b3dd-11760c2be758
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'DimComercios (2)'.FechaAlta
+	toColumn: LocalDateTable_126441fc-7097-434a-8f4e-5ac47bf561f1.Date
+
+relationship deb53268-0710-4d95-906d-88389506bbe1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'DimComercios (2)'.FechaModificacion
+	toColumn: LocalDateTable_d60a1e25-b9ff-443a-bfbf-4c881934f39d.Date
+
+relationship 9b285d50-02e3-483d-96cc-fce34407f8ad
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'DimComercios (2)'.FechaBaja
+	toColumn: LocalDateTable_84d41c66-b234-4a83-a633-9ce06d56e42b.Date
+
+relationship 2a643ace-80ad-46d6-91fb-eb63ec629fb4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimComercios.FechaAlta1
+	toColumn: LocalDateTable_22d08d76-d7fb-421a-847a-156c4f3f828a.Date
+
+relationship ab8f37b1-7751-e6c0-6890-3b51c47dcaf2
+	toCardinality: many
+	fromColumn: DimComercios.RubroComercio
+	toColumn: 'Operaciones DimRubrosComercios'.RubroComercio
+
+relationship 6e73cd68-5115-1159-083c-948eaeb90afc
+	isActive: false
+	fromColumn: DimComerciosReactivados.FechaPrimeraTransaccion_Date_2027
+	toColumn: 'DimTiempo (2)'.Fecha
+
+relationship 55b594a1-0839-41bf-f485-8406c1bddee3
+	crossFilteringBehavior: bothDirections
+	fromColumn: FactTransaccionesComercios.ComercioEcosistemaID
+	toColumn: Comercios_nuevos_2027.ComercioEcosistemaID
+
+relationship 060a690c-be97-4bc6-bb29-a7fb57624017
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'DimTiempo (5)'.Fecha
+	toColumn: LocalDateTable_04b4cec4-8a46-41b3-96cd-9c8a1fdd13a7.Date
+
+relationship 98026b3f-3ad9-6a15-9ea3-7cf39086e1ab
+	fromColumn: Comercios_nuevos_2027.FechaAlta
+	toColumn: 'DimTiempo (5)'.Fecha
+
+relationship d7d0ff7f-e0f0-4f67-8b36-80d8d8771b5f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ComerciosReactivados_Long.FechaAlta
+	toColumn: LocalDateTable_e82c90bc-7c99-4fde-9dad-5f57342ed930.Date
+
+relationship d4382806-eef5-59cc-d845-a95b4b8b83b0
+	fromColumn: ComerciosReactivados_Long.FechaPrimeraTransaccion
+	toColumn: 'DimTiempo (5)'.Fecha
+
+relationship 5121ae50-d7b1-b6c4-5ede-df7714f88a1a
+	crossFilteringBehavior: bothDirections
+	fromColumn: ComerciosReactivados_Long.ComercioEcosistemaID
+	toColumn: DimComercioEcosistemaID_Unicos.ComercioEcosistemaID
+
+relationship 55fd1480-c66a-81c6-2f27-2d96e350ffc9
+	fromColumn: FactTransaccionesComercios.ComercioEcosistemaID
+	toColumn: DimComercioEcosistemaID_Unicos.ComercioEcosistemaID
+
